@@ -8,13 +8,15 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'react-scrollsy',
+      formats: ['es', 'umd'],
       fileName: (format) => `react-scrollsy.${format}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'utils'],
+      external: ['react', 'react-dom', 'react/jsx-runtime', 'utils'],
       output: {
         globals: {
-          react: 'React'
+          react: 'React',
+          'react-dom': 'ReactDOM',
         }
       }
     }
