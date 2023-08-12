@@ -58,7 +58,9 @@ export default App;
 
 ### `<ScrollTrackerDocument />`
 
+Sets the document as the main scrolling container.
 This or ScrollTrackerCustom must always be the parent of a ScrollTracker component.
+
 Configuration and properties:
 
 - `resizeThrottle` - (number, required) throttles the recalculations in ms to this value when the document is resized.
@@ -74,7 +76,9 @@ Creates a function which returns a `scrollData` object as such:
 
 ### `<ScrollTrackerCustom />`
 
+Sets a custom element as the main scrolling container.
 This or ScrollTrackerDocument must always be the parent of a ScrollTracker component.
+
 Configuration and properties:
 
 - `resizeThrottle` - (number, required) throttles the recalculations to this value in ms when the document is resized.
@@ -91,9 +95,11 @@ Creates a function which returns a `scrollData` object as such:
 
 ### `<ScrollTracker />`
 
+A specific DOM element and its progress based on its duration and offsets will be managed by this component.
+
 Configuration and properties:
 
-- `elem` - (ref, required) element reference to track scroll progress of.
+- `elem` - (ref, required) sets the element reference to use when tracking scroll progress.
 - `settings` - (object, required)
   - `duration` - (object, required)
     - `distance` - (number, required) how long of the tracked elements duration calculations should be active for.
