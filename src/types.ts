@@ -16,7 +16,7 @@ export interface IScrollDataChildren {
   children: any;
 }
 
-export interface IScrollObjectWithObject {
+export interface IScrollObject {
   scrollObject: {
     progress: number;
     scrollData: IScrollDataBase;
@@ -26,7 +26,7 @@ export interface IScrollObjectWithObject {
   children: any;
 }
 
-export interface IScrollObject {
+export interface IScrollTrackerObject {
   progress: number;
   scrollData: IScrollDataBase;
   start: number;

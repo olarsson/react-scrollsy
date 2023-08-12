@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { memo, useEffect, useState } from "react";
 import { elementVisibility } from "./functions/elementVisibility";
-import { IScrollObject, IScrollTracker } from "./types";
+import { IScrollTrackerObject, IScrollTracker } from "./types";
 
 const childrenAsMethod = (
   children: any,
-  scrollObject: IScrollObject = emptyScrollObject
+  scrollObject: IScrollTrackerObject = emptyScrollObject
 ) => {
   if (typeof children === "function") {
     return children({ scrollObject, children });
@@ -13,7 +13,7 @@ const childrenAsMethod = (
   return children;
 };
 
-const emptyScrollObject: IScrollObject = {
+const emptyScrollObject: IScrollTrackerObject = {
   progress: 0,
   scrollData: {
     containerHeight: 0,
