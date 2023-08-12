@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { scrollDataBaseInterface, scrollTrackerSettingsPropertiesInterface } from '../types';
+import { IScrollDataBase, IScrollTrackerSettingsProperties } from '../types';
 import { elOffsetTopRelativeToContainer } from './utils';
 
-// let isStarted = false;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const elementVisibility = function (el: HTMLElement, scrollData: scrollDataBaseInterface, offsetTop: scrollTrackerSettingsPropertiesInterface | undefined, offsetBottom: scrollTrackerSettingsPropertiesInterface | undefined, duration: scrollTrackerSettingsPropertiesInterface) {
-  // const elementVisibility = function (el: HTMLElement, scrollData: scrollDataBaseInterface, offsetTop: scrollTrackerSettingsPropertiesInterface | undefined, offsetBottom: scrollTrackerSettingsPropertiesInterface | undefined, duration: scrollTrackerSettingsPropertiesInterface, onStart: any | undefined, onEnd: any | undefined) {
+const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase, offsetTop: IScrollTrackerSettingsProperties | undefined, offsetBottom: IScrollTrackerSettingsProperties | undefined, duration: IScrollTrackerSettingsProperties) {
   let heightDuration = 0;
   let elOffset = 0;
-
-  // const self = elementVisibility;
 
   switch (duration.basedOn) {
     case 'doc':
@@ -89,72 +83,15 @@ const elementVisibility = function (el: HTMLElement, scrollData: scrollDataBaseI
 
   const start = elOffset + offsetTopVal;
   const end = elOffset + durationInPx - offsetBottomVal;
-
   const visibleFromBottom = (scrollData.scrollTop - start) / (end - start);
-
   const progress = Math.min(Math.max(visibleFromBottom, 0), 1);
 
-  // console.log(self.isStarted, progress);
-
-  // if (!self.isStarted && self.isEnded && progress > 0 && progress < 1 && typeof onStart === 'function') {
-  //   self.isStarted = true;
-  //   self.isEnded = false;
-  //   onStart();
-  //   // console.log(onStart);
-  // }
-
-  // if (self.isStarted && !self.isEnded && progress >= 1 && typeof onEnd === 'function') {
-  //   // self.isStarted = true;
-  //   // self.isEnded = true;
-  //   self.isStarted = false;
-  //   onEnd();
-  //   // console.log(onEnd);
-  // }
-
-  // if (progress >= 1 && self.isEnded === false && typeof onEnd === 'function') {
-  //   self.isEnded = true;
-  //   onEnd(progress);
-  // }
-
-  // if (progress > 0 && progress < 1 && self.isStarted === false && typeof onStart === 'function') {
-  //   self.isStarted = true;
-  //   onStart(progress);
-  // }
-
-  // if (progress <= 0) {
-  //   self.isStarted = false;
-  // }
-
-  // if (progress < 1) {
-  //   self.isEnded === false;
-  // }
-
-  // if (!self.isEnded && progress >= 1 && typeof onEnd === 'function') {
-  //   self.isEnded = true;
-  //   self.isStarted = false;
-  //   console.log(onEnd);
-  // }
-
-  // console.log({
-  //   // progress: Math.min(Math.max(visibleFromBottom, 0), 1),
-  //   // offsetTopVal,
-  //   duration,
-  //   scrollData,
-  //   heightDuration,
-  //   elOffset,
-  //   start,
-  //   end
-  // });
   return {
     progress,
     scrollData,
     start,
-    // onStart,
     end
   };
 };
-
-// elementVisibility.isStarted = false;
-// elementVisibility.isEnded = true;
 
 export { elementVisibility };

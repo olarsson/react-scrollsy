@@ -1,6 +1,6 @@
-import { scrollDataInterface } from '../types';
+import { IScrollDataChildren } from '../types';
 
-export const childrenAsMethod = ({ scrollData, children }: scrollDataInterface) => {
+export const childrenAsMethod = ({ scrollData, children }: IScrollDataChildren) => {
   if (typeof children === 'function') {
     return children({
       scrollData: {

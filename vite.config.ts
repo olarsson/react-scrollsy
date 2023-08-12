@@ -3,10 +3,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import dts from "vite-plugin-dts";
 
-// console.log(path.resolve(__dirname, 'src/index.tsx'));
-
-
-// https://vitejs.dev/config/
 export default defineConfig({
   build: {
     lib: {

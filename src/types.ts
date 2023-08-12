@@ -1,63 +1,74 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface scrollDataBaseInterface {
+export interface IScrollDataBase {
   scrollTop: number;
   scrollHeight: number;
   containerHeight: number;
   percentProgress: number;
   element?: HTMLElement | undefined;
 }
-export interface scrollDataDocumentInterface {
-  scrollData: scrollDataBaseInterface;
+
+export interface IScrollData {
+  scrollData: IScrollDataBase;
 }
 
-export interface scrollDataInterface {
-  scrollData: scrollDataBaseInterface;
+export interface IScrollDataChildren {
+  scrollData: IScrollDataBase;
   children: any;
 }
 
-export interface scrollObjectWithObjectInterface {
+export interface IScrollObjectWithObject {
   scrollObject: {
     progress: number;
-    scrollData: scrollDataBaseInterface;
+    scrollData: IScrollDataBase;
     start: number;
     end: number;
   };
   children: any;
 }
 
-export interface scrollObjectInterface {
+export interface IScrollObject {
   progress: number;
-  scrollData: scrollDataBaseInterface;
+  scrollData: IScrollDataBase;
   start: number;
   end: number;
 }
 
-export interface scrollTrackerSettingsPropertiesInterface {
+export interface IScrollTrackerSettingsProperties {
   distance: number;
   unit: 'px' | '%';
   basedOn: '' | 'doc' | 'elem' | 'vp';
 }
 
-export interface scrollTrackerSettingsInterface {
-  offsetTop?: scrollTrackerSettingsPropertiesInterface;
-  offsetBottom?: scrollTrackerSettingsPropertiesInterface;
-  duration: scrollTrackerSettingsPropertiesInterface;
+export interface IScrollTrackerSettings {
+  offsetTop?: IScrollTrackerSettingsProperties;
+  offsetBottom?: IScrollTrackerSettingsProperties;
+  duration: IScrollTrackerSettingsProperties;
 }
 
-export interface scrollTrackerSettingsArrayInterface extends Array<scrollTrackerSettingsInterface> { }
+export interface IScrollTrackerSettingsArray extends Array<IScrollTrackerSettings> { }
 
-export interface scrollTrackerInterface {
-  scrollData: scrollDataBaseInterface;
+export interface IScrollTracker {
+  scrollData: IScrollDataBase;
   children: React.ReactNode | any;
-  elem?: React.RefObject<HTMLInputElement>; // always a ref
-  settings: scrollTrackerSettingsInterface;
+  elem?: React.RefObject<HTMLInputElement>;
+  settings: IScrollTrackerSettings;
   onStart?: any;
   onEnd?: any;
 }
 
-export interface scrollTrackerDocumentInterface {
-  scrollThrottle: number;
+export interface IScrollTrackerDocument {
   resizeThrottle: number;
-  customScrollingElement?: HTMLElement | undefined;
+  children: any;
+}
+
+export interface IScrollTrackerCustom {
+  resizeThrottle: number;
+  scrollingElement?: string;
+  children: any;
+}
+
+export interface IScrollTrackerCustomMain {
+  resizeThrottle: number;
+  customScrollingElement?: HTMLElement | null;
   children: any;
 }

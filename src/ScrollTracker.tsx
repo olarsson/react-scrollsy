@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { memo, useEffect, useState } from "react";
 import { elementVisibility } from "./functions/elementVisibility";
-import { scrollObjectInterface, scrollTrackerInterface } from "./types";
+import { IScrollObject, IScrollTracker } from "./types";
 
 const childrenAsMethod = (
   children: any,
-  scrollObject: scrollObjectInterface = emptyScrollObject
+  scrollObject: IScrollObject = emptyScrollObject
 ) => {
   if (typeof children === "function") {
     return children({ scrollObject, children });
@@ -13,8 +13,8 @@ const childrenAsMethod = (
   return children;
 };
 
-const emptyScrollObject: scrollObjectInterface = {
-  progress: -1,
+const emptyScrollObject: IScrollObject = {
+  progress: 0,
   scrollData: {
     containerHeight: 0,
     element: undefined,
@@ -34,7 +34,7 @@ export const ScrollTracker = memo(
     settings,
     onStart,
     onEnd,
-  }: scrollTrackerInterface) => {
+  }: IScrollTracker) => {
     const { offsetTop, offsetBottom, duration } = settings;
 
     const [isStarted, setIsStarted] = useState(false);
@@ -60,8 +60,6 @@ export const ScrollTracker = memo(
       offsetTop,
       offsetBottom,
       duration
-      // onStart,
-      // onEnd
     );
 
     const { progress } = scrollObject;
@@ -86,8 +84,6 @@ export const ScrollTracker = memo(
     if (progress < 1 && isEnded === true && typeof onEnd === "function") {
       setIsEnded(false);
     }
-
-    // console.log(scrollObject);
 
     return childrenAsMethod(children, scrollObject);
   }

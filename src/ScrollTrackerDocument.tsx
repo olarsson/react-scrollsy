@@ -2,19 +2,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 
-// import utils from "./functions/utils";
-// const { throttle, correctInnerHeight } = utils;
-import { throttle, correctInnerHeight } from './functions/utils';
-// import { throttle, correctInnerHeight } from "utils";
+import { throttle, correctInnerHeight } from "./functions/utils";
 import { childrenAsMethod } from "./functions/childrenAsMethod";
-import { scrollTrackerDocumentInterface } from "./types";
+import { IScrollTrackerDocument } from "./types";
+import { defaultConfig } from "./defaultConfig";
 
 export const ScrollTrackerDocument = ({
   children,
-  // customScrollingElement = undefined, // document.documentElement
-  scrollThrottle = 30,
-  resizeThrottle = 150,
-}: scrollTrackerDocumentInterface) => {
+  resizeThrottle = defaultConfig.resizeThrottle,
+}: IScrollTrackerDocument) => {
   const documentScrollingElement = document.documentElement;
 
   if (!documentScrollingElement) {
@@ -43,10 +39,6 @@ export const ScrollTrackerDocument = ({
     setcontainerHeight(correctInnerHeight());
   };
 
-  const scrollEvent = throttle(() => {
-    onScroll();
-  }, scrollThrottle);
-
   const resizeEvent = throttle(() => {
     onResizeEvent();
   }, resizeThrottle);
@@ -62,12 +54,12 @@ export const ScrollTrackerDocument = ({
   }, []);
 
   useEffect(() => {
-    document.addEventListener("scroll", scrollEvent, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true });
 
     onScroll();
 
     return () => {
-      document.removeEventListener("scroll", scrollEvent);
+      document.removeEventListener("scroll", onScroll);
     };
   }, [containerHeight]);
 

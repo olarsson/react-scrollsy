@@ -14,6 +14,8 @@ declare global {
 
 export const windowHeight = () => window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
+export const getContainerClientHeight = (elem: HTMLElement) => elem.clientHeight;
+
 // -------------------
 // Math
 // -------------------
