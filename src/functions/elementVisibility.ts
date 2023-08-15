@@ -3,31 +3,25 @@ import { IScrollDataBase, IScrollTrackerSettingsProperties } from '../types';
 import { elOffsetTopRelativeToContainer } from './utils';
 
 const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase, offsetTop: IScrollTrackerSettingsProperties | undefined, offsetBottom: IScrollTrackerSettingsProperties | undefined, duration: IScrollTrackerSettingsProperties) {
-  let heightDuration = 0;
-  let elOffset = 0;
+  let heightDuration: number = 0;
+  let elOffset: number = 0;
+  let offsetTopVal: number = 0;
+  let offsetBottomVal: number = 0;
+  let durationInPx: number = 0;
 
   switch (duration.basedOn) {
     case 'doc':
-      // fixed + relative duration
       heightDuration = scrollData.scrollHeight - scrollData.containerHeight;
       break;
     case 'vp':
-      // fixed duration
-      // heightDuration = scrollData.containerHeight;
-
-      // absolute + relative duration
       heightDuration = scrollData.containerHeight;
       elOffset = elOffsetTopRelativeToContainer(el, scrollData.element) - scrollData.containerHeight;
       break;
     case 'elem':
-      // relative duration
-      heightDuration = el.getBoundingClientRect().bottom; // - scrollData.containerHeight - elOffsetTopRelativeToContainer(el, scrollData.element);
+      heightDuration = el.getBoundingClientRect().bottom;
       elOffset = elOffsetTopRelativeToContainer(el, scrollData.element) - scrollData.containerHeight;
       break;
   }
-
-  let offsetTopVal = 0;
-  let offsetBottomVal = 0;
 
   if (offsetTop) {
     if (offsetTop.unit === 'px') {
@@ -65,7 +59,6 @@ const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase
     }
   }
 
-  let durationInPx = 0;
   if (duration.unit === 'px') durationInPx = duration.distance;
   if (duration.unit === '%') {
     switch (duration.basedOn) {
@@ -81,10 +74,10 @@ const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase
     }
   }
 
-  const start = elOffset + offsetTopVal;
-  const end = elOffset + durationInPx - offsetBottomVal;
-  const visibleFromBottom = (scrollData.scrollTop - start) / (end - start);
-  const progress = Math.min(Math.max(visibleFromBottom, 0), 1);
+  const start: number = elOffset + offsetTopVal;
+  const end: number = elOffset + durationInPx - offsetBottomVal;
+  const visibleFromBottom: number = (scrollData.scrollTop - start) / (end - start);
+  const progress: number = Math.min(Math.max(visibleFromBottom, 0), 1);
 
   return {
     progress,

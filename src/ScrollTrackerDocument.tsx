@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 
 import { throttle, correctInnerHeight } from "./functions/utils";
 import { childrenAsMethod } from "./functions/childrenAsMethod";
 import { IScrollTrackerDocument } from "./types";
-import { defaultConfig } from "./defaultConfig";
+import { defaultConfig } from "./config";
 
-export const ScrollTrackerDocument = ({
-  children,
-  resizeThrottle = defaultConfig.resizeThrottle,
-}: IScrollTrackerDocument) => {
-  const documentScrollingElement = document.documentElement;
+export const ScrollTrackerDocument = ({ children, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerDocument) => {
+  const documentScrollingElement: HTMLElement = document.documentElement;
 
   if (!documentScrollingElement) {
     throw new Error("No document.documentElement found.");
@@ -19,10 +15,10 @@ export const ScrollTrackerDocument = ({
 
   let timeout: any = null;
 
-  const [containerHeight, setcontainerHeight] = useState(correctInnerHeight());
-  const [percentProgress, setPercentProgress] = useState(0);
+  const [containerHeight, setcontainerHeight] = useState<number>(correctInnerHeight());
+  const [percentProgress, setPercentProgress] = useState<number>(0);
 
-  const onScroll = () => {
+  const onScroll = (): void => {
     // If there's a timer, cancel it
     if (timeout) {
       window.cancelAnimationFrame(timeout);
@@ -35,11 +31,11 @@ export const ScrollTrackerDocument = ({
     });
   };
 
-  const onResizeEvent = () => {
+  const onResizeEvent = (): void => {
     setcontainerHeight(correctInnerHeight());
   };
 
-  const resizeEvent = throttle(() => {
+  const resizeEvent = throttle((): void => {
     onResizeEvent();
   }, resizeThrottle);
 

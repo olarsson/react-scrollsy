@@ -1,12 +1,12 @@
-# react-scrollsy
+# react-scrollsy ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
- Badge       | URL
-:------------|:---------------------------------------------------------------------------------|
-Normal size  | ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
-Gzipped size | ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js?compression=gzip)
-Brotli size  | ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js?compression=brotli)
+## Live demo / Code examples
+
+Live demo: https://olarsson.github.io/react-scrollsy-examples/
+
+Code examples: https://github.com/olarsson/react-scrollsy-examples/tree/master/src
 
 ## Installation
 
@@ -19,10 +19,7 @@ Here is a very basic example that tracks the scroll progress of the document.
 ```js
 import { ScrollTrackerDocument, ScrollTracker } from "react-scrollsy";
 
-import {
-  IScrollData,
-  IScrollObject,
-} from "react-scrollsy/dist/types";
+import { IScrollData, IScrollObject } from "react-scrollsy/dist/types";
 
 import { useRef } from "react";
 
@@ -44,11 +41,7 @@ function App() {
               },
             }}>
             {({ scrollObject }: IScrollObject) => {
-              return (
-                <h1 ref={refPageProgress}>
-                  Here is the scroll progress: {scrollObject.progress}
-                </h1>
-              );
+              return <h1 ref={refPageProgress}>Here is the scroll progress: {scrollObject.progress}</h1>;
             }}
           </ScrollTracker>
         );
@@ -80,6 +73,16 @@ Creates a function which returns a `scrollData` object as such:
   - `percentProgress` - (number, %) scroll progress in percent expressed as a number between 0 to 1.
   - `scrollHeight` - (number, px) the total scrollable height of the document.
 
+```js
+<ScrollTrackerDocument resizeThrottle={150}>
+  {({ scrollData }: IScrollData) => {
+    return (
+      // ScrollTracker components and other components can go inside here
+    );
+  }}
+</ScrollTrackerDocument>
+```
+
 ### `<ScrollTrackerCustom />`
 
 Sets a custom element as the main scrolling container.
@@ -98,6 +101,19 @@ Creates a function which returns a `scrollData` object as such:
   - `element` - (number, px) the tracked element for scrolling (custom element).
   - `percentProgress` - (number, %) scroll progress in percent expressed as a number between 0 to 1.
   - `scrollHeight` - (number, px) the total scrollable height of the document.
+
+```js
+<ScrollTrackerCustom
+  key={active.toString()} // forces a rerender of the tracker, use this if you for example hide the element with 'display: none'
+  resizeThrottle={150}
+  scrollingElement='#custom-scroll-container'>
+  {({ scrollData }: IScrollData) => {
+    return (
+      // ScrollTracker components and other components can go inside here
+    );
+  }}
+</ScrollTrackerCustom>
+```
 
 ### `<ScrollTracker />`
 
@@ -125,3 +141,38 @@ Creates a function which returns a `scrollObject` object as such:
   - `progress` - (number, %) scroll progress in percent expressed as a number between 0 to 1.
   - `start` - (number, px) the start position in pixels when scroll progress calculation should begin.
   - `end` - (number, px) the end position in pixels when scroll progress calculation should end.
+
+```js
+<ScrollTracker
+  scrollData={scrollData} // the scrollData object returned by either ScrollTrackerDocument or ScrollTrackerCustom
+  elem={refElem}
+  settings={{
+    duration: {
+      distance: 100,
+      unit: "%",
+      basedOn: "elem",
+    },
+    offsetTop: {
+      distance: 25,
+      unit: "%",
+      basedOn: "vp",
+    },
+    offsetBottom: {
+      distance: -200,
+      unit: "px",
+      basedOn: "", // when using px this can be left empty
+    },
+  }}>
+  {({ scrollObject }: IScrollObject) => {
+    return (
+      // return for example the scrollObject.progress to reflect progress, and any other elements/components that you wish
+    )
+  }}
+</ScrollTracker>
+```
+
+### Todo
+
+- [ ] Option to throttle the animationframe
+- [ ] Write (more) tests
+- [ ] Refactor the ScrollTrackerCustom?

@@ -1,37 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 
-import { throttle, getContainerClientHeight } from "./functions/utils";
+import { throttle, getContainerClientHeight, waitForElm } from "./functions/utils";
 import { childrenAsMethod } from "./functions/childrenAsMethod";
 import { IScrollTrackerCustom, IScrollTrackerCustomMain } from "./types";
-import { defaultConfig } from "./defaultConfig";
+import { defaultConfig } from "./config";
 
-function waitForElm(selector: any) {
-  return new Promise<HTMLElement>((resolve) => {
-    if (document.querySelector(selector)) {
-      return resolve(document.querySelector(selector));
-    }
-
-    const observer = new MutationObserver(() => {
-      if (document.querySelector(selector)) {
-        resolve(document.querySelector(selector));
-        observer.disconnect();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-  });
-}
-
-export const ScrollTrackerCustom = ({
-  children,
-  scrollingElement,
-  resizeThrottle = defaultConfig.resizeThrottle,
-}: IScrollTrackerCustom) => {
-  const [update, setUpdate] = useState(false);
+export const ScrollTrackerCustom = ({ children, scrollingElement, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerCustom) => {
+  const [update, setUpdate] = useState<boolean>(false);
   const [customHtmlElement, setCustomHtmlElement] = useState<HTMLElement | null>(null);
 
   const returns = childrenAsMethod({
@@ -52,13 +28,9 @@ export const ScrollTrackerCustom = ({
     }
   });
 
-  // console.log("ScrollTrackerCustom", customHtmlElement, update);
-
   if (update) {
     return (
-      <ScrollTrackerCustomMain
-        resizeThrottle={resizeThrottle}
-        customScrollingElement={customHtmlElement}>
+      <ScrollTrackerCustomMain resizeThrottle={resizeThrottle} customScrollingElement={customHtmlElement}>
         {children}
       </ScrollTrackerCustomMain>
     );
@@ -67,11 +39,7 @@ export const ScrollTrackerCustom = ({
   return returns;
 };
 
-const ScrollTrackerCustomMain = ({
-  children,
-  customScrollingElement,
-  resizeThrottle = defaultConfig.resizeThrottle,
-}: IScrollTrackerCustomMain) => {
+const ScrollTrackerCustomMain = ({ children, customScrollingElement, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerCustomMain) => {
   const documentScrollingElement = customScrollingElement;
 
   if (!documentScrollingElement) {
@@ -81,14 +49,11 @@ const ScrollTrackerCustomMain = ({
   let timeout: number | null = null;
 
   // console.log(getContainerClientHeight(documentScrollingElement));
-  
 
-  const [containerHeight, setContainerHeight] = useState(
-    getContainerClientHeight(documentScrollingElement)
-  );
-  const [percentProgress, setPercentProgress] = useState(0);
+  const [containerHeight, setContainerHeight] = useState<number>(getContainerClientHeight(documentScrollingElement));
+  const [percentProgress, setPercentProgress] = useState<number>(0);
 
-  const onScroll = () => {
+  const onScroll = (): void => {
     // If there's a timer, cancel it
     if (timeout) {
       window.cancelAnimationFrame(timeout);
@@ -101,11 +66,11 @@ const ScrollTrackerCustomMain = ({
     });
   };
 
-  const onResizeEvent = () => {
+  const onResizeEvent = (): void => {
     setContainerHeight(getContainerClientHeight(documentScrollingElement));
   };
 
-  const resizeEvent = throttle(() => {
+  const resizeEvent = throttle((): void => {
     onResizeEvent();
   }, resizeThrottle);
 

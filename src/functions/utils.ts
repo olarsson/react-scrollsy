@@ -16,6 +16,26 @@ export const windowHeight = () => window.innerHeight || document.documentElement
 
 export const getContainerClientHeight = (elem: HTMLElement) => elem.clientHeight;
 
+export function waitForElm(selector: any) {
+  return new Promise<HTMLElement>((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+
+    const observer: MutationObserver = new MutationObserver(() => {
+      if (document.querySelector(selector)) {
+        resolve(document.querySelector(selector));
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+}
+
 // -------------------
 // Math
 // -------------------
@@ -24,8 +44,8 @@ export const elOffsetTopRelativeToContainer = (el: HTMLElement | undefined, cont
   if (!el || !container) {
     throw 'element/container is not defined.'
   }
-  const rect = el.getBoundingClientRect();
-  const scrollTop = container.scrollTop - container.offsetTop;
+  const rect: DOMRect = el.getBoundingClientRect();
+  const scrollTop: number = container.scrollTop - container.offsetTop;
   return rect.top + scrollTop;
 };
 
@@ -33,13 +53,13 @@ export const elOffsetTopRelativeToContainer = (el: HTMLElement | undefined, cont
 // Browser detection
 // -------------------
 
-export const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+export const isIOS = (): boolean => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
 // -------------------
 // IOS fixes
 // -------------------
 
-export const correctInnerHeight = () => {
+export const correctInnerHeight = (): number => {
   if (!isIOS()) return windowHeight();
 
   return innerHeight();
