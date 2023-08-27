@@ -16,6 +16,7 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
 
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState<boolean>(false);
+  const [elemIsReady, setElemIsReady] = useState<boolean>(false);
 
   useEffect(() => {
     if (isStarted) {
@@ -29,9 +30,15 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
     }
   }, [isEnded]);
 
-  if (!elem?.current) return childrenAsMethod(children, emptyScrollObject);
+  useEffect(() => {
+    if (elem?.current) {
+      setElemIsReady(true);
+    }
+  }, [elem]);
 
-  const scrollObject = elementVisibility(elem.current, scrollData, offsetTop, offsetBottom, duration);
+  if (!elemIsReady) return childrenAsMethod(children, emptyScrollObject);
+
+  const scrollObject = elementVisibility(elem!.current!, scrollData, offsetTop, offsetBottom, duration);
 
   const { progress } = scrollObject;
 
