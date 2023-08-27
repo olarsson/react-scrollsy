@@ -1,7 +1,8 @@
 import path from 'path'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// import react from '@vitejs/plugin-react'
 import dts from "vite-plugin-dts";
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
 export default defineConfig({
   build: {
@@ -12,7 +13,7 @@ export default defineConfig({
       fileName: (format) => `react-scrollsy.${format}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', 'utils'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         globals: {
           react: 'React',
@@ -22,7 +23,8 @@ export default defineConfig({
     }
   },
   plugins: [
-    react(),
+    peerDepsExternal(),
+    // react(),
     dts({
       insertTypesEntry: true,
     })

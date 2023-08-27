@@ -89,7 +89,7 @@ H.throttle = R;
   };
   Object.defineProperty(e, "__esModule", { value: !0 }), r(x, e), r(H, e);
 })(E);
-const F = () => window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight, b = (e) => e.clientHeight;
+const F = () => window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight, y = (e) => e.clientHeight;
 function A(e) {
   return new Promise((n) => {
     if (document.querySelector(e))
@@ -108,7 +108,7 @@ const P = (e, n) => {
     throw "element/container is not defined.";
   const r = e.getBoundingClientRect(), t = n.scrollTop - n.offsetTop;
   return r.top + t;
-}, I = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream, y = () => I() ? L() : F(), N = function(e, n, r, t, i) {
+}, I = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream, b = () => I() ? L() : F(), N = function(e, n, r, t, i) {
   let o = 0, c = 0, u = 0, s = 0, l = 0;
   switch (i.basedOn) {
     case "doc":
@@ -205,21 +205,23 @@ const P = (e, n) => {
   },
   children: n
 }) : n, G = ({ children: e, resizeThrottle: n = T.resizeThrottle }) => {
-  const r = document.documentElement;
+  const r = document == null ? void 0 : document.documentElement;
   if (!r)
     throw new Error("No document.documentElement found.");
+  if (typeof window > "u")
+    throw new Error("No window found.");
   let t = null;
-  const [i, o] = g(y()), [c, u] = g(0), s = () => {
+  const [i, o] = g(b()), [c, u] = g(0), s = () => {
     t && window.cancelAnimationFrame(t), t = window.requestAnimationFrame(() => {
       const { scrollTop: a, scrollHeight: f } = r;
       u(a / (f - i));
     });
   }, l = () => {
-    o(y());
+    o(b());
   }, d = E.throttle(() => {
     l();
   }, n);
-  return p(() => (window.addEventListener("resize", d), o(y()), l(), () => {
+  return p(() => (window.addEventListener("resize", d), o(b()), l(), () => {
     window.removeEventListener("resize", d);
   }), []), p(() => (document.addEventListener("scroll", s, { passive: !0 }), s(), () => {
     document.removeEventListener("scroll", s);
@@ -252,17 +254,17 @@ const P = (e, n) => {
   if (!t)
     throw new Error("No custom scrolling element found.");
   let i = null;
-  const [o, c] = g(b(t)), [u, s] = g(0), l = () => {
+  const [o, c] = g(y(t)), [u, s] = g(0), l = () => {
     i && window.cancelAnimationFrame(i), i = window.requestAnimationFrame(() => {
       const { scrollTop: f, scrollHeight: m } = t;
       s(f / (m - o));
     });
   }, d = () => {
-    c(b(t));
+    c(y(t));
   }, a = E.throttle(() => {
     d();
   }, r);
-  return p(() => (window.addEventListener("resize", a), c(b(t)), d(), () => {
+  return p(() => (window.addEventListener("resize", a), c(y(t)), d(), () => {
     window.removeEventListener("resize", a);
   }), []), p(() => (t.addEventListener("scroll", l, {
     passive: !0

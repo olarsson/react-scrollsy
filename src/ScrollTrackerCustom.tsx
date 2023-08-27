@@ -46,9 +46,11 @@ const ScrollTrackerCustomMain = ({ children, customScrollingElement, resizeThrot
     throw new Error("No custom scrolling element found.");
   }
 
-  let timeout: number | null = null;
+  if (typeof window === "undefined") {
+    throw new Error("No window found.");
+  }
 
-  // console.log(getContainerClientHeight(documentScrollingElement));
+  let timeout: number | null = null;
 
   const [containerHeight, setContainerHeight] = useState<number>(getContainerClientHeight(documentScrollingElement));
   const [percentProgress, setPercentProgress] = useState<number>(0);

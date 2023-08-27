@@ -7,10 +7,14 @@ import { IScrollTrackerDocument } from "./types";
 import { defaultConfig } from "./config";
 
 export const ScrollTrackerDocument = ({ children, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerDocument) => {
-  const documentScrollingElement: HTMLElement = document.documentElement;
+  const documentScrollingElement: HTMLElement | undefined = document?.documentElement;
 
   if (!documentScrollingElement) {
     throw new Error("No document.documentElement found.");
+  }
+
+  if (typeof window === "undefined") {
+    throw new Error("No window found.");
   }
 
   let timeout: any = null;
