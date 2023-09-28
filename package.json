@@ -1,7 +1,7 @@
 {
   "name": "react-scrollsy",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "license": "MIT",
   "type": "module",
@@ -9,10 +9,15 @@
   "keywords": [
     "react",
     "scrolling",
+    "scrolling animation",
     "scroll",
+    "scroll animation",
     "progress",
     "animation",
     "animate",
+    "animate scroll",
+    "animating",
+    "animating scroll",
     "spring",
     "physics",
     "react-spring"

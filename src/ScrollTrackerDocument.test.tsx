@@ -7,7 +7,7 @@ import { IScrollData } from "./types";
 describe("<ScrollTrackerDocument />", () => {
   test("ScrollTrackerDocument mounts properly", () => {
     const wrapper = render(
-      <ScrollTrackerDocument resizeThrottle={150}>
+      <ScrollTrackerDocument>
         {({ scrollData }: IScrollData) => {
           return (
             <>

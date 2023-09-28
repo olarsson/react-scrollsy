@@ -1,4 +1,4 @@
-# react-scrollsy ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
+# react-scrollsy v1.1 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
@@ -27,7 +27,7 @@ function App() {
   const refPageProgress = useRef(null);
 
   return (
-    <ScrollTrackerDocument resizeThrottle={150}>
+    <ScrollTrackerDocument scrollThrottle={33}> // 1000 ms/30 fps = 33ms, limits the triggered events to 30 fps, optional
       {({ scrollData }: IScrollData) => {
         return (
           <ScrollTracker
@@ -62,7 +62,8 @@ This or ScrollTrackerCustom must always be the parent of a ScrollTracker compone
 
 Configuration and properties:
 
-- `resizeThrottle` - (number, required) throttles the recalculations in ms to this value when the document is resized.
+- `scrollThrottle` - (number) throttles the recalculations in ms to this value when the document is scrolled.
+- `resizeThrottle` - (number) throttles the recalculations in ms to this value when the document is resized.
 
 Creates a function which returns a `scrollData` object as such:
 
@@ -74,7 +75,7 @@ Creates a function which returns a `scrollData` object as such:
   - `scrollHeight` - (number, px) the total scrollable height of the document.
 
 ```js
-<ScrollTrackerDocument resizeThrottle={150}>
+<ScrollTrackerDocument>
   {({ scrollData }: IScrollData) => {
     return (
       // ScrollTracker components and other components can go inside here
@@ -90,7 +91,8 @@ This or ScrollTrackerDocument must always be the parent of a ScrollTracker compo
 
 Configuration and properties:
 
-- `resizeThrottle` - (number, required) throttles the recalculations to this value in ms when the document is resized.
+- `scrollThrottle` - (number) throttles the recalculations to this value in ms when the element is scrolled.
+- `resizeThrottle` - (number) throttles the recalculations to this value in ms when the element is resized.
 - `scrollingElement` - (string, required) the selector for the main scrollable element to track scroll progress of.
 
 Creates a function which returns a `scrollData` object as such:
@@ -105,7 +107,6 @@ Creates a function which returns a `scrollData` object as such:
 ```js
 <ScrollTrackerCustom
   key={active.toString()} // forces a rerender of the tracker, use this if you for example hide the element with 'display: none'
-  resizeThrottle={150}
   scrollingElement='#custom-scroll-container'>
   {({ scrollData }: IScrollData) => {
     return (
@@ -171,8 +172,16 @@ Creates a function which returns a `scrollObject` object as such:
 </ScrollTracker>
 ```
 
+### Whats new
+
+##### Version 1.1
+- [x] You can now throttle the scrolling events
+- [x] resizeThrottle is no longer required
+
+##### Version 1.0
+- [x] Initial release
+
 ### Todo
 
-- [ ] Option to throttle the animationframe
 - [ ] Write (more) tests
 - [ ] Refactor the ScrollTrackerCustom?

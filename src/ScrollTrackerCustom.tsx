@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 
-import { throttle, getContainerClientHeight, waitForElm } from "./functions/utils";
+import { throttle, throttleLastCall, getContainerClientHeight, waitForElm } from "./functions/utils";
 import { childrenAsMethod } from "./functions/childrenAsMethod";
 import { IScrollTrackerCustom, IScrollTrackerCustomMain } from "./types";
 import { defaultConfig } from "./config";
 
-export const ScrollTrackerCustom = ({ children, scrollingElement, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerCustom) => {
+export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement, resizeThrottle }: IScrollTrackerCustom) => {
   const [update, setUpdate] = useState<boolean>(false);
   const [customHtmlElement, setCustomHtmlElement] = useState<HTMLElement | null>(null);
 
@@ -30,7 +30,7 @@ export const ScrollTrackerCustom = ({ children, scrollingElement, resizeThrottle
 
   if (update) {
     return (
-      <ScrollTrackerCustomMain resizeThrottle={resizeThrottle} customScrollingElement={customHtmlElement}>
+      <ScrollTrackerCustomMain scrollThrottle={scrollThrottle} resizeThrottle={resizeThrottle} customScrollingElement={customHtmlElement}>
         {children}
       </ScrollTrackerCustomMain>
     );
@@ -39,7 +39,12 @@ export const ScrollTrackerCustom = ({ children, scrollingElement, resizeThrottle
   return returns;
 };
 
-const ScrollTrackerCustomMain = ({ children, customScrollingElement, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerCustomMain) => {
+const ScrollTrackerCustomMain = ({
+  children,
+  customScrollingElement,
+  scrollThrottle,
+  resizeThrottle = defaultConfig.resizeThrottle,
+}: IScrollTrackerCustomMain) => {
   const documentScrollingElement = customScrollingElement;
 
   if (!documentScrollingElement) {
@@ -76,6 +81,14 @@ const ScrollTrackerCustomMain = ({ children, customScrollingElement, resizeThrot
     onResizeEvent();
   }, resizeThrottle);
 
+  const onScrollEvent = scrollThrottle
+    ? throttleLastCall((): void => {
+        onScroll();
+      }, scrollThrottle)
+    : (): void => {
+        onScroll();
+      };
+
   useEffect(() => {
     window.addEventListener("resize", resizeEvent);
     setContainerHeight(getContainerClientHeight(documentScrollingElement));
@@ -87,14 +100,14 @@ const ScrollTrackerCustomMain = ({ children, customScrollingElement, resizeThrot
   }, []);
 
   useEffect(() => {
-    documentScrollingElement.addEventListener("scroll", onScroll, {
+    documentScrollingElement.addEventListener("scroll", onScrollEvent, {
       passive: true,
     });
 
-    onScroll();
+    onScrollEvent();
 
     return () => {
-      documentScrollingElement.removeEventListener("scroll", onScroll);
+      documentScrollingElement.removeEventListener("scroll", onScrollEvent);
     };
   }, [containerHeight]);
 

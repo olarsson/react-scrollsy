@@ -9,6 +9,37 @@ declare global {
 }
 
 // -------------------
+// Event handling
+// -------------------
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const throttleLastCall = <T extends (...args: any[]) => void>(func: T, limit: number): T => {
+  let lastFunc: any;
+  let lastRan: any;
+
+  return function (this: any, ...args: any[]): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const context = this;
+
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      if (lastFunc) {
+        clearTimeout(lastFunc);
+      }
+
+      lastFunc = setTimeout(() => {
+        if (Date.now() - (lastRan as number) >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - (lastRan as number)));
+    }
+  } as T;
+};
+
+// -------------------
 // Document/Element size functions
 // -------------------
 

@@ -1,7 +1,8 @@
 import { IScrollTrackerObject } from "./types";
 
 export const defaultConfig = {
-  resizeThrottle: 150
+  resizeThrottle: 150,
+  // scrollThrottle: 200
 }
 
 export const emptyScrollObject: IScrollTrackerObject = {

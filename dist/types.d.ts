@@ -49,16 +49,19 @@ export interface IScrollTracker {
     onEnd?: any;
 }
 export interface IScrollTrackerDocument {
-    resizeThrottle: number;
+    resizeThrottle?: number;
+    scrollThrottle?: number;
     children: any;
 }
 export interface IScrollTrackerCustom {
-    resizeThrottle: number;
+    resizeThrottle?: number;
+    scrollThrottle?: number;
     scrollingElement?: string;
     children: any;
 }
 export interface IScrollTrackerCustomMain {
-    resizeThrottle: number;
+    resizeThrottle?: number;
+    scrollThrottle?: number;
     customScrollingElement?: HTMLElement | null;
     children: any;
 }
