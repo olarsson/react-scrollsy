@@ -8,6 +8,10 @@ Live demo: https://olarsson.github.io/react-scrollsy-examples/
 
 Code examples: https://github.com/olarsson/react-scrollsy-examples/tree/master/src
 
+## Repository
+
+URL: https://github.com/olarsson/react-scrollsy
+
 ## Installation
 
     npm i react-scrollsy

@@ -6,6 +6,10 @@
   "license": "MIT",
   "type": "module",
   "author": "Olof Larsson",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olarsson/react-scrollsy.git"
+  },
   "keywords": [
     "react",
     "scrolling",
