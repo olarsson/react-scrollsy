@@ -26,7 +26,7 @@ const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase
       elOffset = elOffsetTopRelativeToContainer(el, scrollData.element)
 
       if (trigger === 'onEnter') {
-        heightDuration = el.getBoundingClientRect().bottom;
+        heightDuration = el.scrollHeight;
         elOffset -= scrollData.containerHeight;
       } else if (trigger === 'onLeave') {
         heightDuration = el.scrollHeight;

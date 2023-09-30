@@ -1,4 +1,4 @@
-import { memo as L, useState as p, useEffect as g } from "react";
+import { memo as R, useState as p, useEffect as g } from "react";
 import { jsx as k } from "react/jsx-runtime";
 var y = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function z(e) {
@@ -126,7 +126,7 @@ const x = (e, n) => {
       s = n.containerHeight, u = x(e, n.element), i === "onEnter" && (u -= n.containerHeight);
       break;
     case "elem":
-      u = x(e, n.element), i === "onEnter" ? (s = e.getBoundingClientRect().bottom, u -= n.containerHeight) : i === "onLeave" && (s = e.scrollHeight);
+      u = x(e, n.element), i === "onEnter" ? (s = e.scrollHeight, u -= n.containerHeight) : i === "onLeave" && (s = e.scrollHeight);
       break;
   }
   if (r) {
@@ -180,10 +180,10 @@ const x = (e, n) => {
     start: f,
     end: d
   };
-}, R = {
+}, q = {
   resizeThrottle: 150
   // scrollThrottle: 200
-}, q = {
+}, L = {
   progress: 0,
   scrollData: {
     containerHeight: 0,
@@ -194,7 +194,7 @@ const x = (e, n) => {
   },
   start: 0,
   end: 0
-}, _ = (e, n = q) => typeof e == "function" ? e({ scrollObject: n, children: e }) : e, J = L(({ scrollData: e, children: n, elem: i, settings: r, onStart: t, onEnd: o }) => {
+}, _ = (e, n = L) => typeof e == "function" ? e({ scrollObject: n, children: e }) : e, K = R(({ scrollData: e, children: n, elem: i, settings: r, onStart: t, onEnd: o }) => {
   const { trigger: s = "onEnter", offsetTop: u, offsetBottom: c, duration: l } = r, [a, f] = p(!1), [d, m] = p(!1), [h, w] = p(!1);
   if (g(() => {
     a && typeof t == "function" && t();
@@ -203,7 +203,7 @@ const x = (e, n) => {
   }, [d]), g(() => {
     i != null && i.current && w(!0);
   }, [i]), !h)
-    return _(n, q);
+    return _(n, L);
   const S = W(i.current, e, s, u, c, l), { progress: v } = S;
   return v > 0 && v < 1 && a === !1 && typeof t == "function" && f(!0), v <= 0 && a === !0 && typeof t == "function" && f(!1), v >= 1 && d === !1 && typeof o == "function" && m(!0), v < 1 && d === !0 && typeof o == "function" && m(!1), _(n, S);
 }), P = ({ scrollData: e, children: n }) => typeof n == "function" ? n({
@@ -215,7 +215,7 @@ const x = (e, n) => {
     element: e.element
   },
   children: n
-}) : n, K = ({ children: e, scrollThrottle: n, resizeThrottle: i = R.resizeThrottle }) => {
+}) : n, Q = ({ children: e, scrollThrottle: n, resizeThrottle: i = q.resizeThrottle }) => {
   const r = document == null ? void 0 : document.documentElement;
   if (!r)
     throw new Error("No document.documentElement found.");
@@ -250,7 +250,7 @@ const x = (e, n) => {
     },
     children: e
   });
-}, Q = ({ children: e, scrollThrottle: n, scrollingElement: i, resizeThrottle: r }) => {
+}, X = ({ children: e, scrollThrottle: n, scrollingElement: i, resizeThrottle: r }) => {
   const [t, o] = p(!1), [s, u] = p(null), c = P({
     scrollData: {
       scrollTop: 0,
@@ -268,7 +268,7 @@ const x = (e, n) => {
   children: e,
   customScrollingElement: n,
   scrollThrottle: i,
-  resizeThrottle: r = R.resizeThrottle
+  resizeThrottle: r = q.resizeThrottle
 }) => {
   const t = n;
   if (!t)
@@ -308,7 +308,7 @@ const x = (e, n) => {
   });
 };
 export {
-  J as ScrollTracker,
-  Q as ScrollTrackerCustom,
-  K as ScrollTrackerDocument
+  K as ScrollTracker,
+  X as ScrollTrackerCustom,
+  Q as ScrollTrackerDocument
 };
