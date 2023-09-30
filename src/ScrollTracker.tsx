@@ -12,7 +12,7 @@ const childrenAsMethod = (children: any, scrollObject: IScrollTrackerObject = em
 };
 
 export const ScrollTracker = memo(({ scrollData, children, elem, settings, onStart, onEnd }: IScrollTracker) => {
-  const { offsetTop, offsetBottom, duration } = settings;
+  const { trigger = "onEnter", offsetTop, offsetBottom, duration } = settings;
 
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState<boolean>(false);
@@ -38,7 +38,7 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
 
   if (!elemIsReady) return childrenAsMethod(children, emptyScrollObject);
 
-  const scrollObject = elementVisibility(elem!.current!, scrollData, offsetTop, offsetBottom, duration);
+  const scrollObject = elementVisibility(elem!.current!, scrollData, trigger, offsetTop, offsetBottom, duration);
 
   const { progress } = scrollObject;
 

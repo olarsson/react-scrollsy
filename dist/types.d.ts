@@ -34,6 +34,7 @@ export interface IScrollTrackerSettingsProperties {
     basedOn: '' | 'doc' | 'elem' | 'vp';
 }
 export interface IScrollTrackerSettings {
+    trigger?: 'onEnter' | 'onLeave';
     offsetTop?: IScrollTrackerSettingsProperties;
     offsetBottom?: IScrollTrackerSettingsProperties;
     duration: IScrollTrackerSettingsProperties;

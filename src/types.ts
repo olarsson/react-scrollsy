@@ -40,6 +40,7 @@ export interface IScrollTrackerSettingsProperties {
 }
 
 export interface IScrollTrackerSettings {
+  trigger?: 'onEnter' | 'onLeave';
   offsetTop?: IScrollTrackerSettingsProperties;
   offsetBottom?: IScrollTrackerSettingsProperties;
   duration: IScrollTrackerSettingsProperties;

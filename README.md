@@ -1,4 +1,4 @@
-# react-scrollsy v1.1 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
+# react-scrollsy v1.1.2 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
@@ -128,6 +128,7 @@ Configuration and properties:
 
 - `elem` - (ref, required) sets the element reference to use when tracking scroll progress.
 - `settings` - (object, required)
+  - `trigger` - (['onEnter' | 'onLeave'], optional) when the calculations should be begin, defaults to 'onEnter'. is only used when 'basedOn' is set to 'elem' or 'vp'. 'onEnter' means the trigger is when the element enters the vp, 'onLeave' is when the element start to leave the vp.
   - `duration` - (object, required)
     - `distance` - (number, required) how long of the tracked elements duration calculations should be active for.
     - `unit` - (['px' | '%'], required) unit the distance should be measured in.
@@ -152,6 +153,7 @@ Creates a function which returns a `scrollObject` object as such:
   scrollData={scrollData} // the scrollData object returned by either ScrollTrackerDocument or ScrollTrackerCustom
   elem={refElem}
   settings={{
+    trigger: 'onLeave',
     duration: {
       distance: 100,
       unit: "%",
@@ -177,6 +179,14 @@ Creates a function which returns a `scrollObject` object as such:
 ```
 
 ### Whats new
+
+##### Version 1.1.2
+- [x] Triggers added, onEnter/onLeave
+- [x] Examples update with the use of triggers
+
+##### Version 1.1.1
+- [x] Readme repo url added
+- [x] package.json repo url added
 
 ##### Version 1.1
 - [x] You can now throttle the scrolling events

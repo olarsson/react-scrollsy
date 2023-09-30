@@ -2,7 +2,7 @@
 import { IScrollDataBase, IScrollTrackerSettingsProperties } from '../types';
 import { elOffsetTopRelativeToContainer } from './utils';
 
-const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase, offsetTop: IScrollTrackerSettingsProperties | undefined, offsetBottom: IScrollTrackerSettingsProperties | undefined, duration: IScrollTrackerSettingsProperties) {
+const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase, trigger: string, offsetTop: IScrollTrackerSettingsProperties | undefined, offsetBottom: IScrollTrackerSettingsProperties | undefined, duration: IScrollTrackerSettingsProperties) {
   let heightDuration: number = 0;
   let elOffset: number = 0;
   let offsetTopVal: number = 0;
@@ -15,11 +15,22 @@ const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase
       break;
     case 'vp':
       heightDuration = scrollData.containerHeight;
-      elOffset = elOffsetTopRelativeToContainer(el, scrollData.element) - scrollData.containerHeight;
+      elOffset = elOffsetTopRelativeToContainer(el, scrollData.element);
+
+      if (trigger === 'onEnter') {
+        elOffset -= scrollData.containerHeight;
+      }
+
       break;
     case 'elem':
-      heightDuration = el.getBoundingClientRect().bottom;
-      elOffset = elOffsetTopRelativeToContainer(el, scrollData.element) - scrollData.containerHeight;
+      elOffset = elOffsetTopRelativeToContainer(el, scrollData.element)
+
+      if (trigger === 'onEnter') {
+        heightDuration = el.getBoundingClientRect().bottom;
+        elOffset -= scrollData.containerHeight;
+      } else if (trigger === 'onLeave') {
+        heightDuration = el.scrollHeight;
+      }
       break;
   }
 
@@ -69,7 +80,7 @@ const elementVisibility = function (el: HTMLElement, scrollData: IScrollDataBase
         durationInPx = heightDuration * (duration.distance / 100);
         break;
       case 'elem':
-        durationInPx = el.scrollHeight * (duration.distance / 100);
+        durationInPx = heightDuration * (duration.distance / 100);
         break;
     }
   }
