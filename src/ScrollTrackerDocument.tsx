@@ -1,20 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { throttle, throttleLastCall, correctInnerHeight } from "./functions/utils";
 import { childrenAsMethod } from "./functions/childrenAsMethod";
 import { IScrollTrackerDocument } from "./types";
 import { defaultConfig } from "./config";
 
-export const ScrollTrackerDocument = ({ children, scrollThrottle, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerDocument) => {
+export const ScrollTrackerDocument = ({ children, scrollThrottle, resizeThrottle }: IScrollTrackerDocument) => {
+  const [domReady, setDomReady] = useState<boolean>(false);
+
+  useEffect(() => {
+    setDomReady(true);
+  }, []);
+
+  return domReady ? (
+    <ScrollTrackerDocumentMain scrollThrottle={scrollThrottle} resizeThrottle={resizeThrottle}>
+      {children}
+    </ScrollTrackerDocumentMain>
+  ) : (
+    childrenAsMethod({
+      scrollData: {
+        scrollTop: 0,
+        scrollHeight: 0,
+        containerHeight: 0,
+        percentProgress: 0,
+        element: undefined,
+      },
+      children: children,
+    })
+  );
+};
+
+const ScrollTrackerDocumentMain = ({ children, scrollThrottle, resizeThrottle = defaultConfig.resizeThrottle }: IScrollTrackerDocument) => {
   const documentScrollingElement: HTMLElement | undefined = document?.documentElement;
 
   if (!documentScrollingElement) {
     throw new Error("No document.documentElement found.");
-  }
-
-  if (typeof window === "undefined") {
-    throw new Error("No window found.");
   }
 
   let timeout: any = null;

@@ -1,4 +1,4 @@
-# react-scrollsy v1.1.3 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
+# react-scrollsy v1.1.5 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
@@ -178,7 +178,24 @@ Creates a function which returns a `scrollObject` object as such:
 </ScrollTracker>
 ```
 
+### Next.js
+If you load react-scrollsy as a dynamic component it will work out of the box, if you want it to work with SSR then you need to change your next config accordingly:
+```js
+const nextConfig = {
+  transpilePackages: ['react-scrollsy']
+};
+```
+If it still doesnt work then change the import string in the following fashion:
+`import { ScrollTrackerDocument, ScrollTracker } from "node_modules/react-scrollsy/dist/react-scrollsy.es";`
+
+
 ### Whats new
+
+##### Version 1.1.5
+- [x] Updated the readme with use examples for Next.js
+
+##### Version 1.1.4
+- [x] Added server side rendering for use with Next.js and such
 
 ##### Version 1.1.3
 - [x] Bugfix, incorrect height calculation after adding triggers
@@ -200,5 +217,6 @@ Creates a function which returns a `scrollObject` object as such:
 
 ### Todo
 
+- [ ] Implement the scroll logic for horizontal scrolling
 - [ ] Write (more) tests
 - [ ] Refactor the ScrollTrackerCustom?

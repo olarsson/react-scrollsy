@@ -2,7 +2,7 @@
 import { memo, useEffect, useState } from "react";
 import { elementVisibility } from "./functions/elementVisibility";
 import { IScrollTrackerObject, IScrollTracker } from "./types";
-import { emptyScrollObject } from "./config";
+import { defaultConfig, emptyScrollObject } from "./config";
 
 const childrenAsMethod = (children: any, scrollObject: IScrollTrackerObject = emptyScrollObject) => {
   if (typeof children === "function") {
@@ -12,7 +12,7 @@ const childrenAsMethod = (children: any, scrollObject: IScrollTrackerObject = em
 };
 
 export const ScrollTracker = memo(({ scrollData, children, elem, settings, onStart, onEnd }: IScrollTracker) => {
-  const { trigger = "onEnter", offsetTop, offsetBottom, duration } = settings;
+  const { trigger = defaultConfig.trigger, offsetTop, offsetBottom, duration } = settings;
 
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState<boolean>(false);

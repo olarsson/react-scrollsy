@@ -8,7 +8,7 @@ import { defaultConfig } from "./config";
 
 export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement, resizeThrottle }: IScrollTrackerCustom) => {
   const [update, setUpdate] = useState<boolean>(false);
-  const [customHtmlElement, setCustomHtmlElement] = useState<HTMLElement | null>(null);
+  const [customHtmlElement, setCustomHtmlElement] = useState<HTMLElement | undefined>(undefined);
 
   const returns = childrenAsMethod({
     scrollData: {
@@ -16,7 +16,7 @@ export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement
       scrollHeight: 0,
       containerHeight: 0,
       percentProgress: 0,
-      element: document.documentElement,
+      element: customHtmlElement,
     },
     children: children,
   });
