@@ -1,4 +1,4 @@
-import { memo as L, useState as h, useEffect as g } from "react";
+import { memo as L, useState as p, useEffect as h } from "react";
 import { jsx as M } from "react/jsx-runtime";
 var y = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function z(e) {
@@ -26,9 +26,9 @@ var j = { exports: {} };
               throw d.code = "MODULE_NOT_FOUND", d;
             }
             var m = t[l] = { exports: {} };
-            r[l][0].call(m.exports, function(p) {
-              var w = r[l][1][p];
-              return s(w || p);
+            r[l][0].call(m.exports, function(g) {
+              var w = r[l][1][g];
+              return s(w || g);
             }, m, m.exports, i, r, t, o);
           }
           return t[l].exports;
@@ -194,19 +194,19 @@ const _ = (e, n) => {
   },
   start: 0,
   end: 0
-}, C = (e, n = q) => typeof e == "function" ? e({ scrollObject: n, children: e }) : e, K = L(({ scrollData: e, children: n, elem: i, settings: r, onStart: t, onEnd: o }) => {
-  const { trigger: s = S.trigger, offsetTop: u, offsetBottom: c, duration: l } = r, [a, f] = h(!1), [d, m] = h(!1), [p, w] = h(!1);
-  if (g(() => {
+}, C = (e, n = q) => typeof e == "function" ? e && e({ scrollObject: n, children: e }) : e, K = L(({ scrollData: e, children: n, elem: i, settings: r, onStart: t, onEnd: o }) => {
+  const { trigger: s = S.trigger, offsetTop: u, offsetBottom: c, duration: l } = r, [a, f] = p(!1), [d, m] = p(!1), [g, w] = p(!1);
+  if (h(() => {
     a && typeof t == "function" && t();
-  }, [a]), g(() => {
+  }, [a]), h(() => {
     d && typeof o == "function" && o();
-  }, [d]), g(() => {
+  }, [d]), h(() => {
     i != null && i.current && w(!0);
-  }, [i]), !p)
+  }, [i]), !g)
     return C(n, q);
   const x = D(i.current, e, s, u, c, l), { progress: v } = x;
   return v > 0 && v < 1 && a === !1 && typeof t == "function" && f(!0), v <= 0 && a === !0 && typeof t == "function" && f(!1), v >= 1 && d === !1 && typeof o == "function" && m(!0), v < 1 && d === !0 && typeof o == "function" && m(!1), C(n, x);
-}), E = ({ scrollData: e, children: n }) => typeof n == "function" ? n({
+}), E = ({ scrollData: e, children: n }) => typeof n == "function" ? n && n({
   scrollData: {
     scrollTop: e.scrollTop,
     scrollHeight: e.scrollHeight,
@@ -216,8 +216,8 @@ const _ = (e, n) => {
   },
   children: n
 }) : n, Q = ({ children: e, scrollThrottle: n, resizeThrottle: i }) => {
-  const [r, t] = h(!1);
-  return g(() => {
+  const [r, t] = p(!1);
+  return h(() => {
     t(!0);
   }, []), r ? /* @__PURE__ */ M(W, { scrollThrottle: n, resizeThrottle: i, children: e }) : E({
     scrollData: {
@@ -234,10 +234,10 @@ const _ = (e, n) => {
   if (!r)
     throw new Error("No document.documentElement found.");
   let t = null;
-  const [o, s] = h(P()), [u, c] = h(0), l = () => {
+  const [o, s] = p(P()), [u, c] = p(0), l = () => {
     t && window.cancelAnimationFrame(t), t = window.requestAnimationFrame(() => {
-      const { scrollTop: m, scrollHeight: p } = r;
-      c(m / (p - o));
+      const { scrollTop: m, scrollHeight: g } = r;
+      c(m / (g - o));
     });
   }, a = () => {
     s(P());
@@ -248,9 +248,9 @@ const _ = (e, n) => {
   }, n) : () => {
     l();
   };
-  return g(() => (window.addEventListener("resize", f), s(P()), a(), () => {
+  return h(() => (window.addEventListener("resize", f), s(P()), a(), () => {
     window.removeEventListener("resize", f);
-  }), []), g(() => (document.addEventListener("scroll", d, { passive: !0 }), d(), () => {
+  }), []), h(() => (document.addEventListener("scroll", d, { passive: !0 }), d(), () => {
     document.removeEventListener("scroll", d);
   }), [o]), E({
     scrollData: {
@@ -263,7 +263,7 @@ const _ = (e, n) => {
     children: e
   });
 }, X = ({ children: e, scrollThrottle: n, scrollingElement: i, resizeThrottle: r }) => {
-  const [t, o] = h(!1), [s, u] = h(void 0), c = E({
+  const [t, o] = p(!1), [s, u] = p(void 0), c = E({
     scrollData: {
       scrollTop: 0,
       scrollHeight: 0,
@@ -288,10 +288,10 @@ const _ = (e, n) => {
   if (typeof window > "u")
     throw new Error("No window found.");
   let o = null;
-  const [s, u] = h(T(t)), [c, l] = h(0), a = () => {
+  const [s, u] = p(T(t)), [c, l] = p(0), a = () => {
     o && window.cancelAnimationFrame(o), o = window.requestAnimationFrame(() => {
-      const { scrollTop: p, scrollHeight: w } = t;
-      l(p / (w - s));
+      const { scrollTop: g, scrollHeight: w } = t;
+      l(g / (w - s));
     });
   }, f = () => {
     u(T(t));
@@ -302,9 +302,9 @@ const _ = (e, n) => {
   }, i) : () => {
     a();
   };
-  return g(() => (window.addEventListener("resize", d), u(T(t)), f(), () => {
+  return h(() => (window.addEventListener("resize", d), u(T(t)), f(), () => {
     window.removeEventListener("resize", d);
-  }), []), g(() => (t.addEventListener("scroll", m, {
+  }), []), h(() => (t.addEventListener("scroll", m, {
     passive: !0
   }), m(), () => {
     t.removeEventListener("scroll", m);

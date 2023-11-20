@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 
 import { throttle, throttleLastCall, correctInnerHeight } from "./functions/utils";
@@ -38,7 +37,7 @@ const ScrollTrackerDocumentMain = ({ children, scrollThrottle, resizeThrottle = 
     throw new Error("No document.documentElement found.");
   }
 
-  let timeout: any = null;
+  let timeout: number | null = null;
 
   const [containerHeight, setcontainerHeight] = useState<number>(correctInnerHeight());
   const [percentProgress, setPercentProgress] = useState<number>(0);

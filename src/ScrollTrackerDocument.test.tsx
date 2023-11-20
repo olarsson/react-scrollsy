@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { describe, test, expect } from "vitest";
 import { render } from "@testing-library/react";
 
@@ -8,14 +10,12 @@ describe("<ScrollTrackerDocument />", () => {
   test("ScrollTrackerDocument mounts properly", () => {
     const wrapper = render(
       <ScrollTrackerDocument>
-        {({ scrollData }: IScrollData) => {
-          return (
-            <>
-              <h1>mounted</h1>
-              <p className='element'>{scrollData.element?.nodeName}</p>
-            </>
-          );
-        }}
+        {({ scrollData }: IScrollData) => (
+          <>
+            <h1>mounted</h1>
+            <p className='element'>{scrollData.element?.nodeName}</p>
+          </>
+        )}
       </ScrollTrackerDocument>
     );
 

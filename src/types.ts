@@ -1,4 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+type TThrottles = {
+  resizeThrottle?: number;
+  scrollThrottle?: number;
+}
+
+type TScrollObject = {
+  progress: number;
+  scrollData: IScrollDataBase;
+  start: number;
+  end: number;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type TChildren = ((props: IScrollDataChildren | IScrollObject) => any)
+  | {
+    children: React.ReactNode
+  }
+
 export interface IScrollDataBase {
   scrollTop: number;
   scrollHeight: number;
@@ -13,25 +30,15 @@ export interface IScrollData {
 
 export interface IScrollDataChildren {
   scrollData: IScrollDataBase;
-  children: any;
+  children: TChildren;
 }
 
 export interface IScrollObject {
-  scrollObject: {
-    progress: number;
-    scrollData: IScrollDataBase;
-    start: number;
-    end: number;
-  };
-  children: any;
+  scrollObject: TScrollObject;
+  children: TChildren;
 }
 
-export interface IScrollTrackerObject {
-  progress: number;
-  scrollData: IScrollDataBase;
-  start: number;
-  end: number;
-}
+export interface IScrollTrackerObject extends TScrollObject { }
 
 export interface IScrollTrackerSettingsProperties {
   distance: number;
@@ -50,29 +57,23 @@ export interface IScrollTrackerSettingsArray extends Array<IScrollTrackerSetting
 
 export interface IScrollTracker {
   scrollData: IScrollDataBase;
-  children: React.ReactNode | any;
+  children: TChildren;
   elem?: React.RefObject<HTMLInputElement>;
   settings: IScrollTrackerSettings;
-  onStart?: any;
-  onEnd?: any;
+  onStart?: () => void;
+  onEnd?: () => void;
 }
 
-export interface IScrollTrackerDocument {
-  resizeThrottle?: number;
-  scrollThrottle?: number;
-  children: any;
+export interface IScrollTrackerDocument extends TThrottles {
+  children: TChildren;
 }
 
-export interface IScrollTrackerCustom {
-  resizeThrottle?: number;
-  scrollThrottle?: number;
+export interface IScrollTrackerCustom extends TThrottles {
   scrollingElement?: string;
-  children: any;
+  children: TChildren;
 }
 
-export interface IScrollTrackerCustomMain {
-  resizeThrottle?: number;
-  scrollThrottle?: number;
+export interface IScrollTrackerCustomMain extends TThrottles {
   customScrollingElement?: HTMLElement | null;
-  children: any;
+  children: TChildren;
 }

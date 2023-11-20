@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 
 import { throttle, throttleLastCall, getContainerClientHeight, waitForElm } from "./functions/utils";
