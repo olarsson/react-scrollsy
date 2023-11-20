@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { memo, useEffect, useState } from "react";
 import { elementVisibility } from "./functions/elementVisibility";
-import { IScrollTrackerObject, IScrollTracker } from "./types";
+import { IScrollTrackerObject, IScrollTracker, TChildren } from "./types";
 import { defaultConfig, emptyScrollObject } from "./config";
 
-const childrenAsMethod = (children: any, scrollObject: IScrollTrackerObject = emptyScrollObject) => {
+const childrenAsMethod = (children: TChildren, scrollObject: IScrollTrackerObject = emptyScrollObject) => {
   if (typeof children === "function") {
+    if (!children) return children;
     return children({ scrollObject, children });
   }
   return children;

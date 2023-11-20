@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IScrollDataBase, IScrollTrackerSettingsProperties } from '../types';
 import { elOffsetTopRelativeToContainer } from './utils';
 

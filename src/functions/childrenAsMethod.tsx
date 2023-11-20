@@ -2,6 +2,7 @@ import { IScrollDataChildren } from "../types";
 
 export const childrenAsMethod = ({ scrollData, children }: IScrollDataChildren) => {
   if (typeof children === "function") {
+    if (!children) return children;
     return children({
       scrollData: {
         scrollTop: scrollData.scrollTop,
