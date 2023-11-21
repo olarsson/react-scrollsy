@@ -9,9 +9,9 @@ type TScrollObject = {
     start: number;
     end: number;
 };
-export type TChildren = ((props: IScrollDataChildren | IScrollObject) => any) | {
+export type TChildren = ((props: IScrollDataChildren | IScrollObject) => unknown) | {
     children: React.ReactNode;
-};
+} | unknown;
 export interface IScrollDataBase {
     scrollTop: number;
     scrollHeight: number;

@@ -10,11 +10,10 @@ type TScrollObject = {
   end: number;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type TChildren = ((props: IScrollDataChildren | IScrollObject) => any)
+export type TChildren = ((props: IScrollDataChildren | IScrollObject) => unknown)
   | {
     children: React.ReactNode
-  }
+  } | unknown
 
 export interface IScrollDataBase {
   scrollTop: number;
