@@ -9,8 +9,6 @@ export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement
   const [update, setUpdate] = useState<boolean>(false);
   const [customHtmlElement, setCustomHtmlElement] = useState<HTMLElement | undefined>(undefined);
 
-  console.log(scrollingElement);
-
   const returns = childrenAsMethod({
     scrollData: {
       scrollTop: 0,
@@ -21,7 +19,6 @@ export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement
     },
     children: children,
   });
-  
 
   waitForElm(scrollingElement).then((elem) => {
     if (!customHtmlElement) {
