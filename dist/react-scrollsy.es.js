@@ -263,9 +263,7 @@ const _ = (e, n) => {
     children: e
   });
 }, X = ({ children: e, scrollThrottle: n, scrollingElement: i, resizeThrottle: r }) => {
-  const [t, o] = p(!1), [s, u] = p(void 0);
-  console.log(i);
-  const c = E({
+  const [t, o] = p(!1), [s, u] = p(void 0), c = E({
     scrollData: {
       scrollTop: 0,
       scrollHeight: 0,
