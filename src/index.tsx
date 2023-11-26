@@ -1,5 +1,5 @@
-import { ScrollTracker } from "./ScrollTracker";
-import { ScrollTrackerDocument } from "./ScrollTrackerDocument";
-import { ScrollTrackerCustom } from "./ScrollTrackerCustom";
+import { ScrollTracker } from "./scroll-trackers/ScrollTracker";
+import { ScrollTrackerDocument } from "./scroll-trackers/ScrollTrackerDocument";
+import { ScrollTrackerCustom } from "./scroll-trackers/ScrollTrackerCustom";
 
 export { ScrollTracker, ScrollTrackerDocument, ScrollTrackerCustom };

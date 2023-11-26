@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import { render } from "@testing-library/react";
 
 import { ScrollTrackerDocument } from "./ScrollTrackerDocument";
-import { IScrollData } from "./types";
+import { IScrollData } from "../types";
 
 describe("<ScrollTrackerDocument />", () => {
   test("ScrollTrackerDocument mounts properly", () => {

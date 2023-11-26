@@ -1,4 +1,4 @@
-# react-scrollsy v1.1.7 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
+# react-scrollsy v1.1.8 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
@@ -55,6 +55,24 @@ function App() {
 }
 
 export default App;
+```
+
+## Usage without TypeScript
+
+You don't use TypeScript? No problem, it's not a requirement. Simply remove the type declarations and it will work just fine. For example:
+
+```js
+      {({ scrollData }: IScrollData) => {
+        return (...);
+      }}
+```
+
+becomes:
+
+```js
+      {({ scrollData }) => {
+        return (...);
+      }}
 ```
 
 ## Components
@@ -190,6 +208,11 @@ If it still doesnt work then change the import string in the following fashion:
 
 
 ### Whats new
+
+##### Version 1.1.8
+- [x] Improved code structure
+- [x] Minor performance enhancements
+- [x] Added usage example without TypeScript
 
 ##### Version 1.1.7
 - [x] Fixed a type declaration bug
