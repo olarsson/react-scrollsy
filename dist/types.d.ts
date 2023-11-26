@@ -9,6 +9,8 @@ type TScrollObject = {
     start: number;
     end: number;
 };
+export type TTimeout = number | null;
+export type TScrollingElement = HTMLElement | null | undefined;
 export type TChildren = ((props: IScrollDataChildren | IScrollObject) => unknown) | {
     children: React.ReactNode;
 } | unknown;

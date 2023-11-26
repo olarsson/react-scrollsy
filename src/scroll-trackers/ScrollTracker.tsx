@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from "react";
-import { elementVisibility } from "./functions/elementVisibility";
-import { IScrollTrackerObject, IScrollTracker, TChildren } from "./types";
-import { defaultConfig, emptyScrollObject } from "./config";
+import { elementVisibility } from "../functions/elementVisibility";
+import { IScrollTrackerObject, IScrollTracker, TChildren } from "../types";
+import { defaultConfig, emptyScrollObject } from "../config";
 
 const childrenAsMethod = (children: TChildren, scrollObject: IScrollTrackerObject = emptyScrollObject) => {
   if (typeof children === "function") {
@@ -19,21 +19,15 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
   const [elemIsReady, setElemIsReady] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isStarted) {
-      typeof onStart === "function" && onStart();
-    }
+    isStarted && typeof onStart === "function" && onStart();
   }, [isStarted]);
 
   useEffect(() => {
-    if (isEnded) {
-      typeof onEnd === "function" && onEnd();
-    }
+    isEnded && typeof onEnd === "function" && onEnd();
   }, [isEnded]);
 
   useEffect(() => {
-    if (elem?.current) {
-      setElemIsReady(true);
-    }
+    elem?.current && setElemIsReady(true);
   }, [elem]);
 
   if (!elemIsReady) return childrenAsMethod(children, emptyScrollObject);
