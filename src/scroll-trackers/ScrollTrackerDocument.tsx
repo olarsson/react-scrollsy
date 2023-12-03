@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { childrenAsMethod } from "../functions/childrenAsMethod";
-import { IScrollTrackerDocument } from "../types";
-import { ScrollTrackerBoth } from "./ScrollTrackerBoth";
+import { childrenAsMethod } from '../functions/childrenAsMethod';
+import { IScrollTrackerDocument } from '../types';
+import { ScrollTrackerBoth } from './ScrollTrackerBoth';
 
 export const ScrollTrackerDocument = ({ children, scrollThrottle, resizeThrottle }: IScrollTrackerDocument) => {
   const [domReady, setDomReady] = useState<boolean>(false);
@@ -22,9 +22,9 @@ export const ScrollTrackerDocument = ({ children, scrollThrottle, resizeThrottle
         scrollHeight: 0,
         containerHeight: 0,
         percentProgress: 0,
-        element: undefined,
+        element: undefined
       },
-      children: children,
+      children: children
     })
   );
 };

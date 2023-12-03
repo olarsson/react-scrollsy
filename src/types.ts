@@ -1,23 +1,25 @@
 type TThrottles = {
   resizeThrottle?: number;
   scrollThrottle?: number;
-}
+};
 
 type TScrollObject = {
   progress: number;
   scrollData: IScrollDataBase;
   start: number;
   end: number;
-}
+};
 
 export type TTimeout = number | null;
 
 export type TScrollingElement = HTMLElement | null | undefined;
 
-export type TChildren = ((props: IScrollDataChildren | IScrollObject) => unknown)
+export type TChildren =
+  | ((props: IScrollDataChildren | IScrollObject) => unknown)
   | {
-    children: React.ReactNode
-  } | unknown
+      children: React.ReactNode;
+    }
+  | unknown;
 
 export interface IScrollDataBase {
   scrollTop: number;
@@ -41,7 +43,7 @@ export interface IScrollObject {
   children: TChildren;
 }
 
-export interface IScrollTrackerObject extends TScrollObject { }
+export interface IScrollTrackerObject extends TScrollObject {}
 
 export interface IScrollTrackerSettingsProperties {
   distance: number;
@@ -56,7 +58,7 @@ export interface IScrollTrackerSettings {
   duration: IScrollTrackerSettingsProperties;
 }
 
-export interface IScrollTrackerSettingsArray extends Array<IScrollTrackerSettings> { }
+export interface IScrollTrackerSettingsArray extends Array<IScrollTrackerSettings> {}
 
 export interface IScrollTracker {
   scrollData: IScrollDataBase;

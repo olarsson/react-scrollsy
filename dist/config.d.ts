@@ -1,4 +1,4 @@
-import { IScrollTrackerObject } from "./types";
+import { IScrollTrackerObject } from './types';
 export declare const defaultConfig: {
     resizeThrottle: number;
     trigger: string;
