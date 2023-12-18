@@ -1,11 +1,16 @@
-import { Dispatch } from "react";
-import { TScrollingElement, TTimeout } from "../types";
+import { Dispatch } from 'react';
+import { TScrollingElement, TTimeout } from '../types';
 
-export const onScroll = ({ timeout, setProgress, scrollElement, containerHeight }: {
-  timeout: TTimeout,
-  setProgress: Dispatch<number>,
-  scrollElement: TScrollingElement,
-  containerHeight: number
+export const onScroll = ({
+  timeout,
+  setProgress,
+  scrollElement,
+  containerHeight
+}: {
+  timeout: TTimeout;
+  setProgress: Dispatch<number>;
+  scrollElement: TScrollingElement;
+  containerHeight: number;
 }): void => {
   // If there's a timer, cancel it
   if (timeout) {

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { waitForElm } from "../functions/utils";
-import { childrenAsMethod } from "../functions/childrenAsMethod";
-import { IScrollTrackerCustom } from "../types";
-import { ScrollTrackerBoth } from "./ScrollTrackerBoth";
+import { waitForElm } from '../functions/utils';
+import { childrenAsMethod } from '../functions/childrenAsMethod';
+import { IScrollTrackerCustom } from '../types';
+import { ScrollTrackerBoth } from './ScrollTrackerBoth';
 
 export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement, resizeThrottle }: IScrollTrackerCustom) => {
   const [update, setUpdate] = useState<boolean>(false);
@@ -15,9 +15,9 @@ export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement
       scrollHeight: 0,
       containerHeight: 0,
       percentProgress: 0,
-      element: customHtmlElement,
+      element: customHtmlElement
     },
-    children: children,
+    children: children
   });
 
   waitForElm(scrollingElement).then((elem) => {

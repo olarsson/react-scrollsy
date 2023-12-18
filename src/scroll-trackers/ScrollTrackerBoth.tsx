@@ -1,16 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
-import { throttle, throttleLastCall, getContainerClientHeight, correctInnerHeight } from "../functions/utils";
-import { childrenAsMethod } from "../functions/childrenAsMethod";
-import { IScrollTrackerCustomMain, TScrollingElement, TTimeout } from "../types";
-import { defaultConfig } from "../config";
-import { onScroll } from "../functions/onScroll";
+import { throttle, throttleLastCall, getContainerClientHeight, correctInnerHeight } from '../functions/utils';
+import { childrenAsMethod } from '../functions/childrenAsMethod';
+import { IScrollTrackerCustomMain, TScrollingElement, TTimeout } from '../types';
+import { defaultConfig } from '../config';
+import { onScroll } from '../functions/onScroll';
 
 export const ScrollTrackerBoth = ({
   children,
   customScrollingElement,
   scrollThrottle,
-  resizeThrottle = defaultConfig.resizeThrottle,
+  resizeThrottle = defaultConfig.resizeThrottle
 }: IScrollTrackerCustomMain) => {
   // defines if the scroll tracking should be for an element (custom) or the document itself
   const customMode: boolean = !!customScrollingElement;
@@ -18,18 +18,16 @@ export const ScrollTrackerBoth = ({
   const scrollElement: TScrollingElement = customMode ? customScrollingElement : document?.documentElement;
 
   if (!scrollElement) {
-    throw new Error("No scrolling element found.");
+    throw new Error('No scrolling element found.');
   }
 
-  if (typeof window === "undefined") {
-    throw new Error("No window found.");
+  if (typeof window === 'undefined') {
+    throw new Error('No window found.');
   }
 
   const timeout: TTimeout = null;
 
-  const [containerHeight, setContainerHeight] = useState<number>(
-    customMode ? getContainerClientHeight(scrollElement) : correctInnerHeight()
-  );
+  const [containerHeight, setContainerHeight] = useState<number>(customMode ? getContainerClientHeight(scrollElement) : correctInnerHeight());
   const [percentProgress, setPercentProgress] = useState<number>(0);
 
   const onResizeEvent = (): void => {
@@ -41,7 +39,7 @@ export const ScrollTrackerBoth = ({
   }, resizeThrottle);
 
   const onScrollCached = useCallback(() => {
-    onScroll({ timeout, setProgress: setPercentProgress, scrollElement: scrollElement, containerHeight });
+    onScroll({ timeout, setProgress: setPercentProgress, scrollElement, containerHeight });
   }, []);
 
   const onScrollEvent = scrollThrottle
@@ -53,26 +51,26 @@ export const ScrollTrackerBoth = ({
       };
 
   useEffect(() => {
-    window.addEventListener("resize", resizeEvent);
+    window.addEventListener('resize', resizeEvent);
     setContainerHeight(customMode ? getContainerClientHeight(scrollElement) : correctInnerHeight());
     onResizeEvent();
 
     return () => {
-      window.removeEventListener("resize", resizeEvent);
+      window.removeEventListener('resize', resizeEvent);
     };
   }, []);
 
   useEffect(() => {
     const elem = customMode ? scrollElement : document;
 
-    elem.addEventListener("scroll", onScrollEvent, {
-      passive: true,
+    elem.addEventListener('scroll', onScrollEvent, {
+      passive: true
     });
 
     onScrollEvent();
 
     return () => {
-      elem.removeEventListener("scroll", onScrollEvent);
+      elem.removeEventListener('scroll', onScrollEvent);
     };
   }, [containerHeight]);
 
@@ -82,8 +80,8 @@ export const ScrollTrackerBoth = ({
       scrollHeight: scrollElement.scrollHeight,
       containerHeight: containerHeight,
       percentProgress: percentProgress,
-      element: scrollElement,
+      element: scrollElement
     },
-    children: children,
+    children: children
   });
 };

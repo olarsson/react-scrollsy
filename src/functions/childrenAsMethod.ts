@@ -1,7 +1,7 @@
-import { IScrollDataChildren } from "../types";
+import { IScrollDataChildren } from '../types';
 
 export const childrenAsMethod = ({ scrollData, children }: IScrollDataChildren) => {
-  if (typeof children === "function") {
+  if (typeof children === 'function') {
     if (!children) return children;
     return children({
       scrollData: {
@@ -9,9 +9,9 @@ export const childrenAsMethod = ({ scrollData, children }: IScrollDataChildren) 
         scrollHeight: scrollData.scrollHeight,
         containerHeight: scrollData.containerHeight,
         percentProgress: scrollData.percentProgress,
-        element: scrollData.element,
+        element: scrollData.element
       },
-      children: children,
+      children: children
     });
   }
   return children;

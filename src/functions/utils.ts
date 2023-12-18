@@ -62,7 +62,7 @@ export function waitForElm(selector: any) {
 
     observer.observe(document.body, {
       childList: true,
-      subtree: true,
+      subtree: true
     });
   });
 }
@@ -73,7 +73,7 @@ export function waitForElm(selector: any) {
 
 export const elOffsetTopRelativeToContainer = (el: HTMLElement | undefined, container: HTMLElement | undefined) => {
   if (!el || !container) {
-    throw 'element/container is not defined.'
+    throw 'element/container is not defined.';
   }
   const rect: DOMRect = el.getBoundingClientRect();
   const scrollTop: number = container.scrollTop - container.offsetTop;

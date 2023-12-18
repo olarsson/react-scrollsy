@@ -1,0 +1,8 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "printWidth": 150,
+  "workbench.startupEditor": "none",
+  "singleQuote": true,
+  "semi": true,
+  "trailingComma": "none"
+}
