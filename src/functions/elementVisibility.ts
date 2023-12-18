@@ -14,8 +14,6 @@ export const calcOffset = ({
   offsetTop?: IScrollTrackerSettingsProperties;
   offsetBottom?: IScrollTrackerSettingsProperties;
 }) => {
-  console.log({ mode, scrollData, elementScrollHeight, offsetTop, offsetBottom });
-
   switch (mode) {
     case 'top':
       if (!offsetTop) return 0;
