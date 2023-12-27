@@ -116,13 +116,7 @@ const W = (e, t) => {
     throw "element/container is not defined.";
   const i = e.getBoundingClientRect(), o = t.scrollTop - t.offsetTop;
   return i.top + o;
-}, $ = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream, O = () => $() ? k() : D(), x = ({
-  mode: e,
-  scrollData: t,
-  elementScrollHeight: i,
-  offsetTop: o,
-  offsetBottom: n
-}) => {
+}, $ = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream, O = () => $() ? k() : D(), x = ({ mode: e, scrollData: t, elementScrollHeight: i, offsetTop: o, offsetBottom: n }) => {
   switch (e) {
     case "top":
       if (!o)
@@ -205,7 +199,7 @@ const W = (e, t) => {
     start: r,
     end: s
   };
-}, K = function(e, t, i, o, n, r) {
+}, K = function({ el: e, scrollData: t, trigger: i, offsetTop: o, offsetBottom: n, duration: r }) {
   const s = W(e, t.element), { scrollHeight: u } = e, { heightDuration: c, elementOffset: l } = B({
     duration: r,
     elementScrollHeight: u,
@@ -226,7 +220,6 @@ const W = (e, t) => {
   progress: 0,
   scrollData: {
     containerHeight: 0,
-    element: void 0,
     percentProgress: 0,
     scrollHeight: 0,
     scrollTop: 0
@@ -236,16 +229,16 @@ const W = (e, t) => {
 }, _ = (e, t = q) => typeof e == "function" ? e && e({ scrollObject: t, children: e }) : e, Z = F(({ scrollData: e, children: t, elem: i, settings: o, onStart: n, onEnd: r }) => {
   const { trigger: s = R.trigger, offsetTop: u, offsetBottom: c, duration: l } = o, [d, p] = m(!1), [a, f] = m(!1), [h, g] = m(!1);
   if (w(() => {
-    d && typeof n == "function" && n();
+    d && n && n();
   }, [d]), w(() => {
-    a && typeof r == "function" && r();
+    a && r && r();
   }, [a]), w(() => {
     i != null && i.current && g(!0);
   }, [i]), !h)
     return _(t, q);
-  const T = K(i.current, e, s, u, c, l), { progress: v } = T;
+  const T = K({ el: i.current, scrollData: e, trigger: s, offsetTop: u, offsetBottom: c, duration: l }), { progress: v } = T;
   return v > 0 && v < 1 && d === !1 && typeof n == "function" && p(!0), v <= 0 && d === !0 && typeof n == "function" && p(!1), v >= 1 && a === !1 && typeof r == "function" && f(!0), v < 1 && a === !0 && typeof r == "function" && f(!1), _(t, T);
-}), P = ({ scrollData: e, children: t }) => typeof t == "function" ? t && t({
+}), P = ({ scrollData: e, children: t }) => typeof t == "function" ? t({
   scrollData: {
     scrollTop: e.scrollTop,
     scrollHeight: e.scrollHeight,
@@ -254,12 +247,7 @@ const W = (e, t) => {
     element: e.element
   },
   children: t
-}) : t, Q = ({
-  timeout: e,
-  setProgress: t,
-  scrollElement: i,
-  containerHeight: o
-}) => {
+}) : t, Q = ({ timeout: e, setProgress: t, scrollElement: i, containerHeight: o }) => {
   e && window.cancelAnimationFrame(e), e = window.requestAnimationFrame(() => {
     if (!i)
       return;
@@ -316,8 +304,7 @@ const W = (e, t) => {
       scrollTop: 0,
       scrollHeight: 0,
       containerHeight: 0,
-      percentProgress: 0,
-      element: void 0
+      percentProgress: 0
     },
     children: e
   });

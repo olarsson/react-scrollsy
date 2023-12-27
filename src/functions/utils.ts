@@ -71,7 +71,7 @@ export function waitForElm(selector: any) {
 // Math
 // -------------------
 
-export const elOffsetTopRelativeToContainer = (el: HTMLElement | undefined, container: HTMLElement | undefined) => {
+export const elOffsetTopRelativeToContainer = (el?: HTMLElement, container?: HTMLElement) => {
   if (!el || !container) {
     throw 'element/container is not defined.';
   }

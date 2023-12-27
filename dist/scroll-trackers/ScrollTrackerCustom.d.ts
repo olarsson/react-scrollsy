@@ -1,2 +1,2 @@
-import { IScrollTrackerCustom } from '../types';
-export declare const ScrollTrackerCustom: ({ children, scrollThrottle, scrollingElement, resizeThrottle }: IScrollTrackerCustom) => any;
+import type { ScrollTrackerCustomProps } from '../types';
+export declare const ScrollTrackerCustom: ({ children, scrollThrottle, scrollingElement, resizeThrottle }: ScrollTrackerCustomProps) => any;

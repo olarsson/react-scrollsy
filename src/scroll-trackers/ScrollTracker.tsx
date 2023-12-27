@@ -1,9 +1,9 @@
 import { memo, useEffect, useState } from 'react';
 import { elementVisibility } from '../functions/elementVisibility';
-import { IScrollTrackerObject, IScrollTracker, TChildren } from '../types';
+import type { ScrollTrackerObject, ScrollTrackerProps, Children } from '../types';
 import { defaultConfig, emptyScrollObject } from '../config';
 
-const childrenAsMethod = (children: TChildren, scrollObject: IScrollTrackerObject = emptyScrollObject) => {
+const childrenAsMethod = (children: Children, scrollObject: ScrollTrackerObject = emptyScrollObject) => {
   if (typeof children === 'function') {
     if (!children) return children;
     return children({ scrollObject, children });
@@ -11,7 +11,7 @@ const childrenAsMethod = (children: TChildren, scrollObject: IScrollTrackerObjec
   return children;
 };
 
-export const ScrollTracker = memo(({ scrollData, children, elem, settings, onStart, onEnd }: IScrollTracker) => {
+export const ScrollTracker = memo(({ scrollData, children, elem, settings, onStart, onEnd }: ScrollTrackerProps) => {
   const { trigger = defaultConfig.trigger, offsetTop, offsetBottom, duration } = settings;
 
   const [isStarted, setIsStarted] = useState<boolean>(false);
@@ -19,11 +19,11 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
   const [elemIsReady, setElemIsReady] = useState<boolean>(false);
 
   useEffect(() => {
-    isStarted && typeof onStart === 'function' && onStart();
+    if (isStarted && onStart) onStart();
   }, [isStarted]);
 
   useEffect(() => {
-    isEnded && typeof onEnd === 'function' && onEnd();
+    if (isEnded && onEnd) onEnd();
   }, [isEnded]);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
 
   if (!elemIsReady) return childrenAsMethod(children, emptyScrollObject);
 
-  const scrollObject = elementVisibility(elem!.current!, scrollData, trigger, offsetTop, offsetBottom, duration);
+  const scrollObject = elementVisibility({ el: elem!.current!, scrollData, trigger, offsetTop, offsetBottom, duration });
 
   const { progress } = scrollObject;
 

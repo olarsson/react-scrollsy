@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest';
 
 import { calcDurationInPx, calcOffset } from './elementVisibility';
-import { IScrollDataBase } from '../types';
+import type { ScrollDataBase } from '../types';
 
-const scrollData: IScrollDataBase = {
+const scrollData: ScrollDataBase = {
   scrollTop: 200,
   scrollHeight: 1000,
   containerHeight: 300,

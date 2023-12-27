@@ -1,8 +1,10 @@
-import { Dispatch } from 'react';
-import { TScrollingElement, TTimeout } from '../types';
-export declare const onScroll: ({ timeout, setProgress, scrollElement, containerHeight }: {
-    timeout: TTimeout;
+import type { Dispatch } from 'react';
+import type { ScrollingElement, Timeout } from '../types';
+interface OnScroll {
+    timeout: Timeout;
     setProgress: Dispatch<number>;
-    scrollElement: TScrollingElement;
+    scrollElement?: ScrollingElement;
     containerHeight: number;
-}) => void;
+}
+export declare const onScroll: ({ timeout, setProgress, scrollElement, containerHeight }: OnScroll) => void;
+export {};

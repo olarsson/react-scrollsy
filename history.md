@@ -1,18 +1,6 @@
 ### History
 
-
-##### Version 1.1.9
-- [x] New file structure and better modularization
-- [x] More tests added
-- [x] Parallax example added
-
-##### Version 1.1.8
-- [x] Improved code structure
-- [x] Minor performance enhancements
-- [x] Added usage example without TypeScript
-
-##### Version 1.1.7
-- [x] Fixed a type declaration bug
+All versions before 1.1.7 are listed here, check out the "releases" on the github repository to view history after that point.
 
 ##### Version 1.1.6
 - [x] Improved type declarations
