@@ -17,13 +17,8 @@ export const ScrollTrackerBoth = ({
 
   const scrollElement: ScrollingElement = customMode ? customScrollingElement : document?.documentElement;
 
-  if (!scrollElement) {
-    throw new Error('No scrolling element found.');
-  }
-
-  if (typeof window === 'undefined') {
-    throw new Error('No window found.');
-  }
+  if (!scrollElement) throw new Error('No scrolling element found.');
+  if (typeof window === 'undefined') throw new Error('No window found.');
 
   const timeout: Timeout = null;
 

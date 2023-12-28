@@ -28,6 +28,10 @@ export interface ScrollDataChildren {
     scrollData: ScrollDataBase;
     children: Children;
 }
+export interface ScrollObjectChildren {
+    scrollObject: ScrollTrackerObject;
+    children: Children;
+}
 export interface ScrollObject {
     scrollObject: ScrollObjectProperties;
     children: Children;

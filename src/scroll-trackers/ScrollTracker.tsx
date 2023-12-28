@@ -1,18 +1,10 @@
 import { memo, useEffect, useState } from 'react';
 import { elementVisibility } from '../functions/elementVisibility';
-import type { ScrollTrackerObject, ScrollTrackerProps, Children } from '../types';
+import type { ScrollTrackerProps, ScrollObjectChildren } from '../types';
 import { defaultConfig, emptyScrollObject } from '../config';
 
-const childrenAsMethod = (children: Children, scrollObject: ScrollTrackerObject = emptyScrollObject) => {
-  if (typeof children === 'function') {
-    if (!children) return children;
-    return children({ scrollObject, children });
-  }
-  return children;
-};
-
-// const childrenAsMethod = (children: Children, scrollObject: ScrollTrackerObject = emptyScrollObject) =>
-//   typeof children === 'function' ? children({ scrollObject, children }) : children;
+const childrenAsObjectMethod = ({ children, scrollObject = emptyScrollObject }: ScrollObjectChildren) =>
+  typeof children === 'function' ? children({ scrollObject, children }) : children;
 
 export const ScrollTracker = memo(({ scrollData, children, elem, settings, onStart, onEnd }: ScrollTrackerProps) => {
   const { trigger = defaultConfig.trigger, offsetTop, offsetBottom, duration } = settings;
@@ -33,7 +25,7 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
     elem?.current && setElemIsReady(true);
   }, [elem]);
 
-  if (!elemIsReady) return childrenAsMethod(children, emptyScrollObject);
+  if (!elemIsReady) return childrenAsObjectMethod({ scrollObject: emptyScrollObject, children });
 
   const scrollObject = elementVisibility({ el: elem!.current!, scrollData, trigger, offsetTop, offsetBottom, duration });
 
@@ -55,5 +47,5 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
     setIsEnded(false);
   }
 
-  return childrenAsMethod(children, scrollObject);
+  return childrenAsObjectMethod({ scrollObject, children });
 });
