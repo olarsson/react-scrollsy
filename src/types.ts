@@ -15,7 +15,7 @@ export type Timeout = number | null;
 export type ScrollingElement = HTMLElement | null | undefined;
 
 export type Children =
-  | ((props: ScrollDataChildren | ScrollObject) => React.ReactNode)
+  | ((props: ScrollDataChildren | ScrollObject) => unknown)
   | {
       children: React.ReactNode;
     }

@@ -11,6 +11,9 @@ const childrenAsMethod = (children: Children, scrollObject: ScrollTrackerObject 
   return children;
 };
 
+// const childrenAsMethod = (children: Children, scrollObject: ScrollTrackerObject = emptyScrollObject) =>
+//   typeof children === 'function' ? children({ scrollObject, children }) : children;
+
 export const ScrollTracker = memo(({ scrollData, children, elem, settings, onStart, onEnd }: ScrollTrackerProps) => {
   const { trigger = defaultConfig.trigger, offsetTop, offsetBottom, duration } = settings;
 
