@@ -1,4 +1,4 @@
-# react-scrollsy v1.1.9 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
+# react-scrollsy v1.1.10 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
@@ -23,7 +23,7 @@ Here is a very basic example that tracks the scroll progress of the document.
 ```js
 import { ScrollTrackerDocument, ScrollTracker } from "react-scrollsy";
 
-import { IScrollData, IScrollObject } from "react-scrollsy/dist/types";
+import type { ScrollData, ScrollObject } from "react-scrollsy/dist/types";
 
 import { useRef } from "react";
 
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <ScrollTrackerDocument scrollThrottle={33}> // 1000 ms/30 fps = 33ms, limits the triggered events to 30 fps, optional
-      {({ scrollData }: IScrollData) => {
+      {({ scrollData }: ScrollData) => {
         return (
           <ScrollTracker
             scrollData={scrollData}
@@ -44,7 +44,7 @@ function App() {
                 basedOn: "doc",
               },
             }}>
-            {({ scrollObject }: IScrollObject) => {
+            {({ scrollObject }: ScrollObject) => {
               return <h1 ref={refPageProgress}>Here is the scroll progress: {scrollObject.progress}</h1>;
             }}
           </ScrollTracker>
@@ -62,7 +62,7 @@ export default App;
 You don't use TypeScript? No problem, it's not a requirement. Simply remove the type declarations and it will work just fine. For example:
 
 ```js
-      {({ scrollData }: IScrollData) => {
+      {({ scrollData }: ScrollData) => {
         return (...);
       }}
 ```
@@ -98,7 +98,7 @@ Creates a function which returns a `scrollData` object as such:
 
 ```js
 <ScrollTrackerDocument>
-  {({ scrollData }: IScrollData) => {
+  {({ scrollData }: ScrollData) => {
     return (
       // ScrollTracker components and other components can go inside here
     );
@@ -130,7 +130,7 @@ Creates a function which returns a `scrollData` object as such:
 <ScrollTrackerCustom
   key={active.toString()} // forces a rerender of the tracker, use this if you for example hide the element with 'display: none'
   scrollingElement='#custom-scroll-container'>
-  {({ scrollData }: IScrollData) => {
+  {({ scrollData }: ScrollData) => {
     return (
       // ScrollTracker components and other components can go inside here
     );
@@ -188,7 +188,7 @@ Creates a function which returns a `scrollObject` object as such:
       basedOn: "", // when using px this can be left empty
     },
   }}>
-  {({ scrollObject }: IScrollObject) => {
+  {({ scrollObject }: ScrollObject) => {
     return (
       // return for example the scrollObject.progress to reflect progress, and any other elements/components that you wish
     )

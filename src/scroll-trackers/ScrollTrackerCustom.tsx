@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { waitForElm } from '../functions/utils';
 import { childrenAsMethod } from '../functions/childrenAsMethod';
-import { IScrollTrackerCustom } from '../types';
+import type { ScrollTrackerCustomProps } from '../types';
 import { ScrollTrackerBoth } from './ScrollTrackerBoth';
 
-export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement, resizeThrottle }: IScrollTrackerCustom) => {
+export const ScrollTrackerCustom = ({ children, scrollThrottle, scrollingElement, resizeThrottle }: ScrollTrackerCustomProps) => {
   const [update, setUpdate] = useState<boolean>(false);
   const [customHtmlElement, setCustomHtmlElement] = useState<HTMLElement | undefined>(undefined);
 

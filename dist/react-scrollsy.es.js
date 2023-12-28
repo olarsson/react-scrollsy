@@ -1,39 +1,39 @@
 import { memo as F, useState as m, useEffect as w, useCallback as L } from "react";
-import { jsx as C } from "react/jsx-runtime";
+import { jsx as j } from "react/jsx-runtime";
 var y = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function A(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
-function H(e) {
+function b(e) {
   throw new Error('Could not dynamically require "' + e + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
-var S = { exports: {} };
+var C = { exports: {} };
 (function(e, t) {
   (function(i) {
     e.exports = i();
   })(function() {
     return function() {
       function i(o, n, r) {
-        function s(l, d) {
+        function s(l, f) {
           if (!n[l]) {
             if (!o[l]) {
-              var p = typeof H == "function" && H;
-              if (!d && p)
-                return p(l, !0);
+              var h = typeof b == "function" && b;
+              if (!f && h)
+                return h(l, !0);
               if (u)
                 return u(l, !0);
               var a = new Error("Cannot find module '" + l + "'");
               throw a.code = "MODULE_NOT_FOUND", a;
             }
-            var f = n[l] = { exports: {} };
-            o[l][0].call(f.exports, function(h) {
-              var g = o[l][1][h];
-              return s(g || h);
-            }, f, f.exports, i, o, n, r);
+            var d = n[l] = { exports: {} };
+            o[l][0].call(d.exports, function(p) {
+              var g = o[l][1][p];
+              return s(g || p);
+            }, d, d.exports, i, o, n, r);
           }
           return n[l].exports;
         }
-        for (var u = typeof H == "function" && H, c = 0; c < r.length; c++)
+        for (var u = typeof b == "function" && b, c = 0; c < r.length; c++)
           s(r[c]);
         return s;
       }
@@ -58,14 +58,14 @@ var S = { exports: {} };
       }();
     }, {}] }, {}, [1])(1);
   });
-})(S);
-var z = S.exports;
+})(C);
+var z = C.exports;
 const k = /* @__PURE__ */ A(z);
-var j = {}, M = {};
+var S = {}, M = {};
 Object.defineProperty(M, "__esModule", { value: !0 });
-var b = {};
-Object.defineProperty(b, "__esModule", { value: !0 });
-b.throttle = void 0;
+var H = {};
+Object.defineProperty(H, "__esModule", { value: !0 });
+H.throttle = void 0;
 function N(e, t) {
   var i, o;
   return function() {
@@ -75,7 +75,7 @@ function N(e, t) {
     }, t), o = e.apply(r, n)), o;
   };
 }
-b.throttle = N;
+H.throttle = N;
 (function(e) {
   var t = y && y.__createBinding || (Object.create ? function(o, n, r, s) {
     s === void 0 && (s = r), Object.defineProperty(o, s, { enumerable: !0, get: function() {
@@ -87,8 +87,8 @@ b.throttle = N;
     for (var r in o)
       r !== "default" && !Object.prototype.hasOwnProperty.call(n, r) && t(n, o, r);
   };
-  Object.defineProperty(e, "__esModule", { value: !0 }), i(M, e), i(b, e);
-})(j);
+  Object.defineProperty(e, "__esModule", { value: !0 }), i(M, e), i(H, e);
+})(S);
 const V = (e, t) => {
   let i, o;
   return function(...n) {
@@ -116,13 +116,7 @@ const W = (e, t) => {
     throw "element/container is not defined.";
   const i = e.getBoundingClientRect(), o = t.scrollTop - t.offsetTop;
   return i.top + o;
-}, $ = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream, O = () => $() ? k() : D(), x = ({
-  mode: e,
-  scrollData: t,
-  elementScrollHeight: i,
-  offsetTop: o,
-  offsetBottom: n
-}) => {
+}, G = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream, O = () => G() ? k() : D(), x = ({ mode: e, scrollData: t, elementScrollHeight: i, offsetTop: o, offsetBottom: n }) => {
   switch (e) {
     case "top":
       if (!o)
@@ -158,7 +152,7 @@ const W = (e, t) => {
       return 0;
   }
   return 0;
-}, G = ({ heightDuration: e, duration: t }) => {
+}, $ = ({ heightDuration: e, duration: t }) => {
   if (t.unit === "px")
     return t.distance;
   if (t.unit === "%")
@@ -205,18 +199,18 @@ const W = (e, t) => {
     start: r,
     end: s
   };
-}, K = function(e, t, i, o, n, r) {
+}, K = function({ el: e, scrollData: t, trigger: i, offsetTop: o, offsetBottom: n, duration: r }) {
   const s = W(e, t.element), { scrollHeight: u } = e, { heightDuration: c, elementOffset: l } = B({
     duration: r,
     elementScrollHeight: u,
     elementOffsetTopRelativeToContainer: s,
     trigger: i,
     scrollData: t
-  }), d = x({ mode: "top", scrollData: t, elementScrollHeight: u, offsetTop: o }), p = x({ mode: "bottom", scrollData: t, elementScrollHeight: u, offsetBottom: n }), a = G({ heightDuration: c, duration: r }), { progress: f, start: h, end: g } = J({ elementOffset: l, offsetTopVal: d, durationInPx: a, offsetBottomVal: p, scrollData: t });
+  }), f = x({ mode: "top", scrollData: t, elementScrollHeight: u, offsetTop: o }), h = x({ mode: "bottom", scrollData: t, elementScrollHeight: u, offsetBottom: n }), a = $({ heightDuration: c, duration: r }), { progress: d, start: p, end: g } = J({ elementOffset: l, offsetTopVal: f, durationInPx: a, offsetBottomVal: h, scrollData: t });
   return {
-    progress: f,
+    progress: d,
     scrollData: t,
-    start: h,
+    start: p,
     end: g
   };
 }, R = {
@@ -226,26 +220,25 @@ const W = (e, t) => {
   progress: 0,
   scrollData: {
     containerHeight: 0,
-    element: void 0,
     percentProgress: 0,
     scrollHeight: 0,
     scrollTop: 0
   },
   start: 0,
   end: 0
-}, _ = (e, t = q) => typeof e == "function" ? e && e({ scrollObject: t, children: e }) : e, Z = F(({ scrollData: e, children: t, elem: i, settings: o, onStart: n, onEnd: r }) => {
-  const { trigger: s = R.trigger, offsetTop: u, offsetBottom: c, duration: l } = o, [d, p] = m(!1), [a, f] = m(!1), [h, g] = m(!1);
+}, _ = ({ children: e, scrollObject: t = q }) => typeof e == "function" ? e({ scrollObject: t, children: e }) : e, Z = F(({ scrollData: e, children: t, elem: i, settings: o, onStart: n, onEnd: r }) => {
+  const { trigger: s = R.trigger, offsetTop: u, offsetBottom: c, duration: l } = o, [f, h] = m(!1), [a, d] = m(!1), [p, g] = m(!1);
   if (w(() => {
-    d && typeof n == "function" && n();
-  }, [d]), w(() => {
-    a && typeof r == "function" && r();
+    f && n && n();
+  }, [f]), w(() => {
+    a && r && r();
   }, [a]), w(() => {
     i != null && i.current && g(!0);
-  }, [i]), !h)
-    return _(t, q);
-  const T = K(i.current, e, s, u, c, l), { progress: v } = T;
-  return v > 0 && v < 1 && d === !1 && typeof n == "function" && p(!0), v <= 0 && d === !0 && typeof n == "function" && p(!1), v >= 1 && a === !1 && typeof r == "function" && f(!0), v < 1 && a === !0 && typeof r == "function" && f(!1), _(t, T);
-}), P = ({ scrollData: e, children: t }) => typeof t == "function" ? t && t({
+  }, [i]), !p)
+    return _({ scrollObject: q, children: t });
+  const T = K({ el: i.current, scrollData: e, trigger: s, offsetTop: u, offsetBottom: c, duration: l }), { progress: v } = T;
+  return v > 0 && v < 1 && f === !1 && typeof n == "function" && h(!0), v <= 0 && f === !0 && typeof n == "function" && h(!1), v >= 1 && a === !1 && typeof r == "function" && d(!0), v < 1 && a === !0 && typeof r == "function" && d(!1), _({ scrollObject: T, children: t });
+}), P = ({ scrollData: e, children: t }) => typeof t == "function" ? t({
   scrollData: {
     scrollTop: e.scrollTop,
     scrollHeight: e.scrollHeight,
@@ -254,12 +247,7 @@ const W = (e, t) => {
     element: e.element
   },
   children: t
-}) : t, Q = ({
-  timeout: e,
-  setProgress: t,
-  scrollElement: i,
-  containerHeight: o
-}) => {
+}) : t, Q = ({ timeout: e, setProgress: t, scrollElement: i, containerHeight: o }) => {
   e && window.cancelAnimationFrame(e), e = window.requestAnimationFrame(() => {
     if (!i)
       return;
@@ -277,25 +265,25 @@ const W = (e, t) => {
     throw new Error("No scrolling element found.");
   if (typeof window > "u")
     throw new Error("No window found.");
-  const s = null, [u, c] = m(n ? E(r) : O()), [l, d] = m(0), p = () => {
+  const s = null, [u, c] = m(n ? E(r) : O()), [l, f] = m(0), h = () => {
     c(n ? E(r) : O());
-  }, a = j.throttle(() => {
-    p();
-  }, o), f = L(() => {
-    Q({ timeout: s, setProgress: d, scrollElement: r, containerHeight: u });
-  }, []), h = i ? V(() => {
-    f();
+  }, a = S.throttle(() => {
+    h();
+  }, o), d = L(() => {
+    Q({ timeout: s, setProgress: f, scrollElement: r, containerHeight: u });
+  }, []), p = i ? V(() => {
+    d();
   }, i) : () => {
-    f();
+    d();
   };
-  return w(() => (window.addEventListener("resize", a), c(n ? E(r) : O()), p(), () => {
+  return w(() => (window.addEventListener("resize", a), c(n ? E(r) : O()), h(), () => {
     window.removeEventListener("resize", a);
   }), []), w(() => {
     const g = n ? r : document;
-    return g.addEventListener("scroll", h, {
+    return g.addEventListener("scroll", p, {
       passive: !0
-    }), h(), () => {
-      g.removeEventListener("scroll", h);
+    }), p(), () => {
+      g.removeEventListener("scroll", p);
     };
   }, [u]), P({
     scrollData: {
@@ -311,13 +299,12 @@ const W = (e, t) => {
   const [o, n] = m(!1);
   return w(() => {
     n(!0);
-  }, []), o ? /* @__PURE__ */ C(I, { scrollThrottle: t, resizeThrottle: i, children: e }) : P({
+  }, []), o ? /* @__PURE__ */ j(I, { scrollThrottle: t, resizeThrottle: i, children: e }) : P({
     scrollData: {
       scrollTop: 0,
       scrollHeight: 0,
       containerHeight: 0,
-      percentProgress: 0,
-      element: void 0
+      percentProgress: 0
     },
     children: e
   });
@@ -334,7 +321,7 @@ const W = (e, t) => {
   });
   return U(i).then((l) => {
     s || (u(l), r(!0));
-  }), n ? /* @__PURE__ */ C(I, { scrollThrottle: t, resizeThrottle: o, customScrollingElement: s, children: e }) : c;
+  }), n ? /* @__PURE__ */ j(I, { scrollThrottle: t, resizeThrottle: o, customScrollingElement: s, children: e }) : c;
 };
 export {
   Z as ScrollTracker,

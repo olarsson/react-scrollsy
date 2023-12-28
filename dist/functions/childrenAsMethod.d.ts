@@ -1,2 +1,2 @@
-import { IScrollDataChildren } from '../types';
-export declare const childrenAsMethod: ({ scrollData, children }: IScrollDataChildren) => any;
+import type { ScrollDataChildren } from '../types';
+export declare const childrenAsMethod: ({ scrollData, children }: ScrollDataChildren) => any;

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { throttle, throttleLastCall, getContainerClientHeight, correctInnerHeight } from '../functions/utils';
 import { childrenAsMethod } from '../functions/childrenAsMethod';
-import { IScrollTrackerCustomMain, TScrollingElement, TTimeout } from '../types';
+import type { ScrollTrackerCustomMainProps, ScrollingElement, Timeout } from '../types';
 import { defaultConfig } from '../config';
 import { onScroll } from '../functions/onScroll';
 
@@ -11,21 +11,16 @@ export const ScrollTrackerBoth = ({
   customScrollingElement,
   scrollThrottle,
   resizeThrottle = defaultConfig.resizeThrottle
-}: IScrollTrackerCustomMain) => {
+}: ScrollTrackerCustomMainProps) => {
   // defines if the scroll tracking should be for an element (custom) or the document itself
   const customMode: boolean = !!customScrollingElement;
 
-  const scrollElement: TScrollingElement = customMode ? customScrollingElement : document?.documentElement;
+  const scrollElement: ScrollingElement = customMode ? customScrollingElement : document?.documentElement;
 
-  if (!scrollElement) {
-    throw new Error('No scrolling element found.');
-  }
+  if (!scrollElement) throw new Error('No scrolling element found.');
+  if (typeof window === 'undefined') throw new Error('No window found.');
 
-  if (typeof window === 'undefined') {
-    throw new Error('No window found.');
-  }
-
-  const timeout: TTimeout = null;
+  const timeout: Timeout = null;
 
   const [containerHeight, setContainerHeight] = useState<number>(customMode ? getContainerClientHeight(scrollElement) : correctInnerHeight());
   const [percentProgress, setPercentProgress] = useState<number>(0);

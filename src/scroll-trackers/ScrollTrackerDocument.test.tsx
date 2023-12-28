@@ -2,13 +2,13 @@ import { describe, test, expect } from 'vitest';
 import { render } from '@testing-library/react';
 
 import { ScrollTrackerDocument } from './ScrollTrackerDocument';
-import { IScrollData } from '../types';
+import type { ScrollData } from '../types';
 
 describe('<ScrollTrackerDocument />', () => {
   test('ScrollTrackerDocument mounts properly', () => {
     const wrapper = render(
       <ScrollTrackerDocument>
-        {({ scrollData }: IScrollData) => (
+        {({ scrollData }: ScrollData) => (
           <>
             <h1>mounted</h1>
             <p className="element">{scrollData.element?.nodeName}</p>

@@ -1,19 +1,45 @@
-import { IScrollDataBase, IScrollTrackerSettingsProperties } from '../types';
+import type { ScrollDataBase, ScrollTrackerSettingsProperties } from '../types';
 import { elOffsetTopRelativeToContainer } from './utils';
 
-export const calcOffset = ({
-  mode,
-  scrollData,
-  elementScrollHeight,
-  offsetTop,
-  offsetBottom
-}: {
+interface CalcOffset {
   mode: string;
-  scrollData: IScrollDataBase;
+  scrollData: ScrollDataBase;
   elementScrollHeight: number;
-  offsetTop?: IScrollTrackerSettingsProperties;
-  offsetBottom?: IScrollTrackerSettingsProperties;
-}) => {
+  offsetTop?: ScrollTrackerSettingsProperties;
+  offsetBottom?: ScrollTrackerSettingsProperties;
+}
+
+interface CalcDurationInPx {
+  heightDuration: number;
+  duration: ScrollTrackerSettingsProperties;
+}
+
+interface CalcHeightDurationAndElementOffset {
+  duration: ScrollTrackerSettingsProperties;
+  elementScrollHeight: number;
+  elementOffsetTopRelativeToContainer: number;
+  trigger: string;
+  scrollData: ScrollDataBase;
+}
+
+interface CalcElementVisibilityReturn {
+  elementOffset: number;
+  offsetTopVal: number;
+  durationInPx: number;
+  offsetBottomVal: number;
+  scrollData: ScrollDataBase;
+}
+
+interface ElementVisibility {
+  el: HTMLElement;
+  scrollData: ScrollDataBase;
+  trigger: string;
+  offsetTop?: ScrollTrackerSettingsProperties;
+  offsetBottom?: ScrollTrackerSettingsProperties;
+  duration: ScrollTrackerSettingsProperties;
+}
+
+export const calcOffset = ({ mode, scrollData, elementScrollHeight, offsetTop, offsetBottom }: CalcOffset) => {
   switch (mode) {
     case 'top':
       if (!offsetTop) return 0;
@@ -64,7 +90,7 @@ export const calcOffset = ({
   return 0;
 };
 
-export const calcDurationInPx = ({ heightDuration, duration }: { heightDuration: number; duration: IScrollTrackerSettingsProperties }) => {
+export const calcDurationInPx = ({ heightDuration, duration }: CalcDurationInPx) => {
   if (duration.unit === 'px') return duration.distance;
   if (duration.unit === '%') {
     switch (duration.basedOn) {
@@ -85,13 +111,7 @@ export const calcHeightDurationAndElementOffset = ({
   elementOffsetTopRelativeToContainer,
   trigger,
   scrollData
-}: {
-  duration: IScrollTrackerSettingsProperties;
-  elementScrollHeight: number;
-  elementOffsetTopRelativeToContainer: number;
-  trigger: string;
-  scrollData: IScrollDataBase;
-}) => {
+}: CalcHeightDurationAndElementOffset) => {
   let heightDuration: number = 0;
   let elementOffset: number = 0;
 
@@ -132,13 +152,7 @@ export const calcElementVisibilityReturn = ({
   durationInPx,
   offsetBottomVal,
   scrollData
-}: {
-  elementOffset: number;
-  offsetTopVal: number;
-  durationInPx: number;
-  offsetBottomVal: number;
-  scrollData: IScrollDataBase;
-}) => {
+}: CalcElementVisibilityReturn) => {
   const start: number = elementOffset + offsetTopVal;
   const end: number = elementOffset + durationInPx - offsetBottomVal;
   const visibleFromBottom: number = (scrollData.scrollTop - start) / (end - start);
@@ -151,14 +165,7 @@ export const calcElementVisibilityReturn = ({
   };
 };
 
-const elementVisibility = function (
-  el: HTMLElement,
-  scrollData: IScrollDataBase,
-  trigger: string,
-  offsetTop: IScrollTrackerSettingsProperties | undefined,
-  offsetBottom: IScrollTrackerSettingsProperties | undefined,
-  duration: IScrollTrackerSettingsProperties
-) {
+export const elementVisibility = function ({ el, scrollData, trigger, offsetTop, offsetBottom, duration }: ElementVisibility) {
   const elementOffsetTopRelativeToContainer = elOffsetTopRelativeToContainer(el, scrollData.element);
   const { scrollHeight: elementScrollHeight } = el;
 
@@ -185,5 +192,3 @@ const elementVisibility = function (
     end
   };
 };
-
-export { elementVisibility };

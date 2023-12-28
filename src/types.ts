@@ -1,84 +1,87 @@
-type TThrottles = {
+type Throttles = {
   resizeThrottle?: number;
   scrollThrottle?: number;
 };
 
-type TScrollObject = {
+type ScrollObjectProperties = {
   progress: number;
-  scrollData: IScrollDataBase;
+  scrollData: ScrollDataBase;
   start: number;
   end: number;
 };
 
-export type TTimeout = number | null;
+export type Timeout = number | null;
 
-export type TScrollingElement = HTMLElement | null | undefined;
+export type ScrollingElement = HTMLElement | null | undefined;
 
-export type TChildren =
-  | ((props: IScrollDataChildren | IScrollObject) => unknown)
+export type Children =
+  | ((props: ScrollDataChildren | ScrollObject) => unknown)
   | {
       children: React.ReactNode;
     }
   | unknown;
 
-export interface IScrollDataBase {
+export interface ScrollDataBase {
   scrollTop: number;
   scrollHeight: number;
   containerHeight: number;
   percentProgress: number;
-  element?: HTMLElement | undefined;
+  element?: HTMLElement;
 }
 
-export interface IScrollData {
-  scrollData: IScrollDataBase;
+export interface ScrollData {
+  scrollData: ScrollDataBase;
 }
 
-export interface IScrollDataChildren {
-  scrollData: IScrollDataBase;
-  children: TChildren;
+export interface ScrollDataChildren {
+  scrollData: ScrollDataBase;
+  children: Children;
 }
 
-export interface IScrollObject {
-  scrollObject: TScrollObject;
-  children: TChildren;
+export interface ScrollObjectChildren {
+  scrollObject: ScrollTrackerObject;
+  children: Children;
 }
 
-export interface IScrollTrackerObject extends TScrollObject {}
+export interface ScrollObject {
+  scrollObject: ScrollObjectProperties;
+  children: Children;
+}
 
-export interface IScrollTrackerSettingsProperties {
+export interface ScrollTrackerObject extends ScrollObjectProperties {}
+
+export interface ScrollTrackerSettingsProperties {
   distance: number;
   unit: 'px' | '%';
   basedOn: '' | 'doc' | 'elem' | 'vp';
 }
 
-export interface IScrollTrackerSettings {
+export interface ScrollTrackerSettings {
   trigger?: 'onEnter' | 'onLeave';
-  offsetTop?: IScrollTrackerSettingsProperties;
-  offsetBottom?: IScrollTrackerSettingsProperties;
-  duration: IScrollTrackerSettingsProperties;
+  offsetTop?: ScrollTrackerSettingsProperties;
+  offsetBottom?: ScrollTrackerSettingsProperties;
+  duration: ScrollTrackerSettingsProperties;
 }
 
-export interface IScrollTrackerSettingsArray extends Array<IScrollTrackerSettings> {}
-
-export interface IScrollTracker {
-  scrollData: IScrollDataBase;
-  children: TChildren;
+export interface ScrollTrackerProps {
+  scrollData: ScrollDataBase;
+  children: Children;
   elem?: React.RefObject<HTMLInputElement>;
-  settings: IScrollTrackerSettings;
+  settings: ScrollTrackerSettings;
   onStart?: () => void;
   onEnd?: () => void;
 }
 
-export interface IScrollTrackerDocument extends TThrottles {
-  children: TChildren;
+export interface ScrollTrackerDocumentProps extends Throttles {
+  children: Children;
 }
 
-export interface IScrollTrackerCustom extends TThrottles {
+export interface ScrollTrackerCustomProps extends Throttles {
   scrollingElement?: string;
-  children: TChildren;
+  children: Children;
 }
 
-export interface IScrollTrackerCustomMain extends TThrottles {
+export interface ScrollTrackerCustomMainProps extends Throttles {
   customScrollingElement?: HTMLElement | null;
-  children: TChildren;
+  children: Children;
 }

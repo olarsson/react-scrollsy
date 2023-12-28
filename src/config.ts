@@ -1,15 +1,14 @@
-import { IScrollTrackerObject } from './types';
+import type { ScrollTrackerObject } from './types';
 
 export const defaultConfig = {
   resizeThrottle: 150,
   trigger: 'onEnter'
 };
 
-export const emptyScrollObject: IScrollTrackerObject = {
+export const emptyScrollObject: ScrollTrackerObject = {
   progress: 0,
   scrollData: {
     containerHeight: 0,
-    element: undefined,
     percentProgress: 0,
     scrollHeight: 0,
     scrollTop: 0
