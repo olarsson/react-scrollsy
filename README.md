@@ -1,4 +1,4 @@
-# react-scrollsy v1.1.10 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
+# react-scrollsy v1.1.12 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
@@ -23,7 +23,7 @@ Here is a very basic example that tracks the scroll progress of the document.
 ```js
 import { ScrollTrackerDocument, ScrollTracker } from "react-scrollsy";
 
-import type { ScrollData, ScrollObject } from "react-scrollsy/dist/types";
+import { ScrollData, ScrollObject } from "react-scrollsy/dist/types";
 
 import { useRef } from "react";
 
