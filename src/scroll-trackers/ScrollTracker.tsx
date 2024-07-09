@@ -22,7 +22,7 @@ export const ScrollTracker = memo(({ scrollData, children, elem, settings, onSta
   }, [isEnded]);
 
   useEffect(() => {
-    elem?.current && setElemIsReady(true);
+    elem?.current && scrollData.element && setElemIsReady(true);
   }, [elem]);
 
   if (!elemIsReady) return childrenAsObjectMethod({ scrollObject: emptyScrollObject, children });

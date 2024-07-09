@@ -77,7 +77,7 @@ export interface ScrollTrackerDocumentProps extends Throttles {
 }
 
 export interface ScrollTrackerCustomProps extends Throttles {
-  scrollingElement?: string;
+  scrollingElement: string | React.RefObject<HTMLInputElement>;
   children: Children;
 }
 

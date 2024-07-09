@@ -1,4 +1,4 @@
-# react-scrollsy v1.1.12 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
+# react-scrollsy v1.2 ![](https://img.badgesize.io/olarsson/react-scrollsy/master/dist/react-scrollsy.es.js)
 
 An ambitious light-weight react module written in TypeScript for tracking scroll progress in a performant way. Developed for use with spring based animation libraries such as react-spring, but can be used with or without any library.
 
@@ -115,7 +115,7 @@ Configuration and properties:
 
 - `scrollThrottle` - (number) throttles the recalculations to this value in ms when the element is scrolled.
 - `resizeThrottle` - (number) throttles the recalculations to this value in ms when the element is resized.
-- `scrollingElement` - (string, required) the selector for the main scrollable element to track scroll progress of.
+- `scrollingElement` - (string/ref, required) the selector for the main scrollable element to track scroll progress of.
 
 Creates a function which returns a `scrollData` object as such:
 
@@ -128,8 +128,9 @@ Creates a function which returns a `scrollData` object as such:
 
 ```js
 <ScrollTrackerCustom
-  key={active.toString()} // forces a rerender of the tracker, use this if you for example hide the element with 'display: none'
-  scrollingElement='#custom-scroll-container'>
+  key={active.toString()} // forces a rerender of the tracker, use this if you for example hide the element with 'display: none' combined with a string based scrollingElement selector
+  scrollingElement='#custom-scroll-container' // this can also be a ref such as scrollingElement={scrollRef}
+  >
   {({ scrollData }: ScrollData) => {
     return (
       // ScrollTracker components and other components can go inside here
@@ -210,4 +211,3 @@ If it still doesnt work then change the import string in the following fashion:
 ### Todo
 
 - [ ] Implement the scroll logic for horizontal scrolling
-- [ ] Refactor the ScrollTrackerCustom to handle both React refs and HTML elements
